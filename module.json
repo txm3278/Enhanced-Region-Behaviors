@@ -1,31 +1,53 @@
 {
-  "id": "module",
-  "title": "New Module",
-  "description": "",
+  "id": "enhanced-region-behavior",
+  "title": "Enhanced Region Behavior",
+  "description": "Adds new region options to scene regions",
   "version": "#{VERSION}#",
   "library": "false",
   "manifestPlusVersion": "1.2.0",
   "compatibility": {
-    "minimum": 10,
-    "verified": 10,
-    "maximum": 11
+    "minimum": 13,
+    "verified": 13,
+    "maximum": 13
   },
   "authors": [
     {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
+      "name": "TMinz",
+      "url": "https://github.com/txm3278",
+      "discord": "tminz"
     }
   ],
+  "documentTypes": {
+        "RegionBehavior": {
+            "Trap": {}
+        }
+    },
   "relationships": {
-    "systems": [],
-    "requires": []
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+        "compatibility": {
+          "minimum": "5.0.3",
+          "verified": "5.0.3"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "midi-qol",
+        "type": "module",
+        "manifest": "https://gitlab.com/tposney/midi-qol/raw/v12dnd4/package/module.json",
+        "compatibility": {
+          "verified": "13.0.3",
+          "minimum": "13.0.3"
+        }
+      }
+    ]
   },
   "esmodules": [
-    "scripts/module.js"
-  ],
-  "scripts": [
-    "scripts/lib/lib.js"
+    "dist/enhanced-region-behavior.mjs"
   ],
   "styles": [
     "styles/module.css"
@@ -37,7 +59,7 @@
       "path": "languages/en.json"
     }
   ],
-  "url": "#{URL}#",
+  "url": "https://github.com/txm3278/Enhanced-Region-Behaviors",
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
   "license": "LICENSE",
@@ -45,7 +67,7 @@
   "media": [
     {
       "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
+      "url": ""
     }
   ]
 }

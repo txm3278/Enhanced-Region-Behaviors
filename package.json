@@ -1,0 +1,32 @@
+{
+  "name": "enhanced-region-behavior",
+  "version": "1.0.0",
+  "description": "Adds new region options to scene regions",
+  "main": "./scripts/module.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/txm3278/Enhanced-Region-Behaviors.git"
+  },
+  "author": "TMinz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/txm3278/Enhanced-Region-Behaviors/issues"
+  },
+  "homepage": "https://github.com/txm3278/Enhanced-Region-Behaviors#readme",
+  "dependencies": {
+    "@eslint/compat": "^1.2.9",
+    "@foundryvtt/foundryvtt-cli": "^1.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.1",
+    "vite": "^6.3.5"
+  }
+}

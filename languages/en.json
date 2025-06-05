@@ -1,3 +1,17 @@
 {
-    "MODULE.hello": "hello"
+  "enhanced-region-behavior": {
+    "TrapDamageLabel": "Damage",
+    "TrapSaveDCLabel": "Save DC",
+    "TrapSaveAbilityLabel": "Save Ability",
+    "TrapDamageTypeLabel": "Damage Type",
+    "TrapDamage": "{name} triggered a trap and took {damage} {type} damage!",
+    "TrapAvoided": "{name} avoided the trap!"
+  },
+  "TYPES":{
+    "RegionBehavior": {
+      "enhanced-region-behavior": {
+        "Trap": "Trap"
+      }
+    }
+  }
 }
