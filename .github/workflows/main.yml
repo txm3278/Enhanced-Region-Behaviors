@@ -33,9 +33,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       - run: npm ci
-      - name: Build Compendiums
-        run: npm run buildCompendiums
-      - name : Webpack build
+      - name : Vite build
         run: npm run build
 
       # Extract version embedded in the tag.
