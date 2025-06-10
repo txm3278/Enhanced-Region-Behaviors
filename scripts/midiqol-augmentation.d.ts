@@ -24,4 +24,12 @@ declare global {
   };
 }
 
+declare module "fvtt-types/configuration" {
+    interface DataModelConfig {
+        RegionBehavior: {
+            YourType: TrapRegionBehaviorType;
+        }
+    }
+}
+
 export {};

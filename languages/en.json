@@ -5,16 +5,25 @@
     "TrapSaveDCLabel": "Save DC",
     "TrapSaveAbilityLabel": "Save Ability",
     "TrapDamageTypeLabel": "Damage Type",
-    "TrapDamage": "{name} triggered a trap and took {damage} {type} damage!",
-    "TrapAvoided": "{name} avoided the trap!",
+    "TrapDamageMessage": "{name} triggered a trap and took {damage} {type} damage!",
+    "TrapAvoidedMessage": "{name} dodged a trap and took a reduced {damage} {type} damage!",
     "TrapSaveFailedMessageLabel": "Save Failed Message",
     "TrapSaveSuccessMessageLabel": "Save Success Message",
-    "TrapDisableAfterTriggerLabel": "Disable After Trigger"
+    "TrapDisableAfterTriggerLabel": "Disable After Trigger",
+    "MusicPlaylistLabel": "Playlist Name (optional)",
+    "MusicSongNamesLabel": "Song Names (comma separated)",
+    "MusicPlayAllLabel": "Play All Songs",
+    "MusicStopLabel": "Stop All Current Music",
+    "MusicPlayPlaylistLabel": "Play Full Playlist",
+    "SoundEffectVolumeLabel": "Volume",
+    "SoundEffectPathLabel": "Path to sound file or sequencer effect"
   },
-  "TYPES":{
+  "TYPES": {
     "RegionBehavior": {
       "enhanced-region-behavior": {
-        "Trap": "Trap"
+        "Trap": "Trap",
+        "Music": "Music",
+        "SoundEffect": "Sound Effect"
       }
     }
   }

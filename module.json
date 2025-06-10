@@ -19,7 +19,9 @@
   ],
   "documentTypes": {
         "RegionBehavior": {
-            "Trap": {}
+            "Trap": {},
+            "Music": {},
+            "SoundEffect": {}
         }
     },
   "relationships": {
@@ -31,17 +33,6 @@
         "compatibility": {
           "minimum": "5.0.3",
           "verified": "5.0.3"
-        }
-      }
-    ],
-    "requires": [
-      {
-        "id": "midi-qol",
-        "type": "module",
-        "manifest": "https://gitlab.com/tposney/midi-qol/raw/v12dnd4/package/module.json",
-        "compatibility": {
-          "verified": "13.0.3",
-          "minimum": "13.0.3"
         }
       }
     ]
