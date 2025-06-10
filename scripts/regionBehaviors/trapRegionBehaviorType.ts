@@ -1,4 +1,11 @@
-const DND_ABILITY_SCORES = {str: 'str', dex: 'dex', con: 'con', int:'int', wis:'wis', cha:'cha'};
+const DND_ABILITY_SCORES = {
+  str: 'str',
+  dex: 'dex',
+  con: 'con',
+  int: 'int',
+  wis: 'wis',
+  cha: 'cha',
+};
 const DND_DAMAGE_TYPES = {
   acid: 'acid',
   bludgeoning: 'bludgeoning',
@@ -17,13 +24,17 @@ const DND_DAMAGE_TYPES = {
 
 const trapSchema = () => {
   return {
+    automateDamage: new foundry.data.fields.BooleanField({
+      required: true,
+      initial: true,
+    }),
     saveDC: new foundry.data.fields.NumberField({
       required: true,
       initial: 15,
     }),
     saveAbility: new foundry.data.fields.StringField({
       required: true,
-      initial: "dex",
+      initial: 'dex',
       choices: DND_ABILITY_SCORES, // Only allow DND ability scores
     }),
     damage: new foundry.data.fields.StringField({
@@ -36,7 +47,7 @@ const trapSchema = () => {
     }),
     damageType: new foundry.data.fields.StringField({
       required: true,
-      initial: "piercing",
+      initial: 'piercing',
       choices: DND_DAMAGE_TYPES, // Only allow DND damage types
     }),
     saveFailedMessage: new foundry.data.fields.StringField({
@@ -62,8 +73,7 @@ type trapSchema = ReturnType<typeof trapSchema>;
 
 export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<trapSchema> {
-
-  static LOCALIZATION_PREFIXES = ["enhanced-region-behavior.Regions.Trap"];
+  static LOCALIZATION_PREFIXES = ['enhanced-region-behavior.Regions.Trap'];
 
   static defineSchema() {
     return {
@@ -108,10 +118,22 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
         mod: saveData.mod,
         prof: saveData.proficient ? actor.system.attributes.prof : 0,
       }).roll();
+      await roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ token }),
+        flavor: `${this.saveAbility} ${game.i18n?.localize(
+          'enhanced-region-behavior.TrapSavingThrowMessage'
+        )}`,
+      });
       saveTotal = roll.total ?? 0;
     } else {
       // Fallback: just roll 1d20
       const roll = await new Roll('1d20').roll();
+      await roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ token }),
+        flavor: `${this.saveAbility} ${game.i18n?.localize(
+          'enhanced-region-behavior.TrapSavingThrowMessage'
+        )}`,
+      });
       saveTotal = roll.total ?? 0;
     }
 
@@ -120,7 +142,14 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
       saved ? this.savedDamage : this.damage
     ).roll();
 
-    if (damageRoll.total > 0) {
+    await damageRoll.toMessage({
+      speaker: ChatMessage.getSpeaker({ token }),
+      flavor: game.i18n?.localize(
+        'enhanced-region-behavior.TrapDamageRollMessage'
+      ),
+    });
+
+    if (this.automateDamage && damageRoll.total > 0) {
       if (midiQOLActive && typeof MidiQOL?.applyTokenDamage === 'function') {
         await MidiQOL.applyTokenDamage(
           [{ damage: damageRoll.total, type: this.damageType }],

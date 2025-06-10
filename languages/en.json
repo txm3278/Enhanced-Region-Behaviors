@@ -2,6 +2,8 @@
   "enhanced-region-behavior": {
     "TrapDamageMessage": "{name} triggered a trap and took {damage} {type} damage!",
     "TrapAvoidedMessage": "{name} dodged a trap and took a reduced {damage} {type} damage!",
+    "TrapSavingThrowMessage": "Saving Throw",
+    "TrapDamageRollMessage": "Trap Damage Roll",
     "Regions": {
       "Trap": {
         "FIELDS": {
@@ -36,6 +38,10 @@
           "disableAfterTrigger": {
             "label": "Disable After Trigger",
             "hint": "If enabled, the trap will be disabled after it is triggered once."
+          },
+          "automateDamage": {
+            "label": "Automate Damage",
+            "hint": "If enabled, the trap will automatically apply damage when triggered."
           }
         }
       },

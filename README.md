@@ -40,6 +40,7 @@ You can install Enhanced Region Behavior using either of the following methods:
 1. Create or edit a Scene Region.
 2. Set the Region Behavior type to **Trap**.
 3. Configure the trap:
+   - **Automate Damage**: Automatically apply damage
    - **Save DC**: The DC for the saving throw.
    - **Save Ability**: The ability score for the save (e.g., DEX, CON).
    - **Damage**: Damage formula if the save fails (e.g., `2d6`).
