@@ -1,0 +1,98 @@
+# Enhanced Region Behavior
+
+Enhanced Region Behavior is a Foundry VTT module that adds powerful new automation options to Scene Regions. With this module, you can trigger traps, play music, or play sound effects automatically when tokens interact with regions on your maps.
+
+## Features
+
+- **Trap Regions**: Automatically roll saving throws and apply damage to tokens that enter, exit, or move within a region. Supports D&D 5e abilities and damage types, with optional MidiQOL integration for advanced automation.
+- **Music Regions**: Play specific songs or playlists, or stop all music, when tokens interact with a region. Supports playing all songs or just the first match.
+- **Sound Effect Regions**: Play a sound effect or sequencer effect when a region is triggered. Supports volume control and integration with the Sequencer module if available.
+
+## Requirements
+
+- Foundry VTT v13+
+- D&D 5e system (minimum 5.0.3)
+- [MidiQOL](https://foundryvtt.com/packages/midi-qol) (optional, for advanced trap automation)
+- [Sequencer](https://foundryvtt.com/packages/sequencer) (optional, for advanced sound effects)
+
+## Installation
+
+You can install Enhanced Region Behavior using either of the following methods:
+
+### Option 1: Foundry's Module Installer (Recommended)
+
+1. In Foundry VTT, go to **Add-on Modules** > **Install Module**.
+2. Search for "Enhanced Region Behavior" in the module browser.
+3. Click **Install** to add the module to your Foundry installation.
+4. Enable the module in your world from the **Manage Modules** menu.
+
+### Option 2: Install via Manifest URL
+
+1. In Foundry VTT, go to **Add-on Modules** > **Install Module**.
+2. Paste the manifest URL from the [GitHub Releases page](https://github.com/txm3278/Enhanced-Region-Behaviors/releases) into the installer.
+3. Click **Install** to add the module to your Foundry installation.
+4. Enable the module in your world from the **Manage Modules** menu.
+
+## Usage
+
+### Trap Regions
+
+1. Create or edit a Scene Region.
+2. Set the Region Behavior type to **Trap**.
+3. Configure the trap:
+   - **Save DC**: The DC for the saving throw.
+   - **Save Ability**: The ability score for the save (e.g., DEX, CON).
+   - **Damage**: Damage formula if the save fails (e.g., `2d6`).
+   - **Damage if Saved**: Damage formula if the save succeeds (e.g., `1d6`).
+   - **Damage Type**: The type of damage (e.g., piercing, fire).
+   - **Save Failed/Success Message**: Custom chat messages.
+   - **Disable After Trigger**: If enabled, the region disables itself after triggering.
+
+When a token triggers the region, the module will roll the saving throw and apply damage automatically.
+
+**MidiQOL Integration:**
+If the [MidiQOL](https://foundryvtt.com/packages/midi-qol) module is installed and enabled, Enhanced Region Behavior will use MidiQOL's workflow to handle saving throws and damage rolls for trap regions. This allows for advanced automation, including applying effects, rolling chat cards, and integrating with other automation modules. If MidiQOL is not present, the module will use Foundry's built-in mechanics for saves and damage.
+
+### Music Regions
+
+1. Create or edit a Scene Region.
+2. Set the Region Behavior type to **Music**.
+3. Configure the music options:
+   - **Playlist Name**: (Optional) Name of the playlist to use.
+   - **Song Names**: Comma-separated list of song names to play.
+   - **Play All Songs**: If enabled, all matching songs will play.
+   - **Stop All Current Music**: If enabled, stops all currently playing music.
+   - **Play Full Playlist**: If enabled, plays the entire playlist.
+
+### Sound Effect Regions
+
+1. Create or edit a Scene Region.
+2. Set the Region Behavior type to **Sound Effect**.
+3. Configure the sound effect:
+   - **Path to sound file or sequencer effect**: The file path or sequencer effect to play.
+   - **Volume**: Volume level (0.0 to 1.0).
+
+If the Sequencer module is active, it will be used for playback; otherwise, Foundry's built-in audio will be used.
+
+## Localization
+
+Currently, only English is provided. You can add additional languages by creating new files in the `languages/` folder.
+
+## Development
+
+- Clone the repository.
+- Run `npm install` to install dependencies.
+- Use `npm run dev` for development or `npm run build` to build the module.
+- The main entry point is [`scripts/module.ts`](scripts/module.ts).
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for details.
+
+## Credits
+
+Created by [TMinz](https://github.com/txm3278).
+
+---
+
+For bug reports or feature requests, please use the [GitHub Issues page](https://github.com/txm3278/Enhanced-Region-Behaviors/issues).
