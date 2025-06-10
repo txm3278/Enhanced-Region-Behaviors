@@ -1,12 +1,10 @@
 const soundEffectSchema = () => {
   return {
     soundPath: new foundry.data.fields.StringField({
-      label: game.i18n?.localize('enhanced-region-behavior.SoundEffectPathLabel'),
       required: true,
       initial: '',
     }),
     volume: new foundry.data.fields.NumberField({
-      label: game.i18n?.localize('enhanced-region-behavior.SoundEffectVolumeLabel'),
       required: false,
       initial: 0.8,
       min: 0,
@@ -20,6 +18,8 @@ type soundEffectSchema = ReturnType<typeof soundEffectSchema>;
 
 export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<soundEffectSchema> {
+
+  static LOCALIZATION_PREFIXES = ["enhanced-region-behavior.Regions.SoundEffect"];
 
   static defineSchema() {
     return {

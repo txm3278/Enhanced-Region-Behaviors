@@ -18,60 +18,40 @@ const DND_DAMAGE_TYPES = {
 const trapSchema = () => {
   return {
     saveDC: new foundry.data.fields.NumberField({
-      label: game.i18n?.localize('enhanced-region-behavior.TrapSaveDCLabel'),
       required: true,
       initial: 15,
     }),
     saveAbility: new foundry.data.fields.StringField({
-      label: game.i18n?.localize(
-        'enhanced-region-behavior.TrapSaveAbilityLabel'
-      ),
       required: true,
       initial: "dex",
       choices: DND_ABILITY_SCORES, // Only allow DND ability scores
     }),
     damage: new foundry.data.fields.StringField({
-      label: game.i18n?.localize('enhanced-region-behavior.TrapDamageLabel'),
       required: true,
       initial: '2d6',
     }),
     savedDamage: new foundry.data.fields.StringField({
-      label: game.i18n?.localize(
-        'enhanced-region-behavior.TrapSavedDamageLabel'
-      ),
       required: true,
       initial: '1d6',
     }),
     damageType: new foundry.data.fields.StringField({
-      label: game.i18n?.localize(
-        'enhanced-region-behavior.TrapDamageTypeLabel'
-      ),
       required: true,
       initial: "piercing",
       choices: DND_DAMAGE_TYPES, // Only allow DND damage types
     }),
     saveFailedMessage: new foundry.data.fields.StringField({
-      label: game.i18n?.localize(
-        'enhanced-region-behavior.TrapSaveFailedMessageLabel'
-      ),
       required: true,
       initial: game.i18n?.localize(
         'enhanced-region-behavior.TrapDamageMessage'
       ),
     }),
     saveSucceededMessage: new foundry.data.fields.StringField({
-      label: game.i18n?.localize(
-        'enhanced-region-behavior.TrapSaveSuccessMessageLabel'
-      ),
       required: true,
       initial: game.i18n?.localize(
         'enhanced-region-behavior.TrapAvoidedMessage'
       ),
     }),
     disableAfterTrigger: new foundry.data.fields.BooleanField({
-      label: game.i18n?.localize(
-        'enhanced-region-behavior.TrapDisableAfterTriggerLabel'
-      ),
       required: true,
       initial: true,
     }),
@@ -82,6 +62,9 @@ type trapSchema = ReturnType<typeof trapSchema>;
 
 export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<trapSchema> {
+
+  static LOCALIZATION_PREFIXES = ["enhanced-region-behavior.Regions.Trap"];
+
   static defineSchema() {
     return {
       events: this._createEventsField({

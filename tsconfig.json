@@ -4,7 +4,7 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "types": ["fvtt-types", "sequencer"],
+    "types": ["fvtt-types", "sequencer", "dnd5e-types/dnd5e/dnd5e.d.mts"],
     "skipLibCheck": true,
 
     /* Bundler mode */

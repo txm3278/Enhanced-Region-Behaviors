@@ -11,7 +11,7 @@ Enhanced Region Behavior is a Foundry VTT module that adds powerful new automati
 ## Requirements
 
 - Foundry VTT v13+
-- D&D 5e system (minimum 5.0.3)
+- D&D 5e system (minimum 5.0.3) (optional, required for Trap Region)
 - [MidiQOL](https://foundryvtt.com/packages/midi-qol) (optional, for advanced trap automation)
 - [Sequencer](https://foundryvtt.com/packages/sequencer) (optional, for advanced sound effects)
 
@@ -35,7 +35,7 @@ You can install Enhanced Region Behavior using either of the following methods:
 
 ## Usage
 
-### Trap Regions
+### Trap Regions (5e)
 
 1. Create or edit a Scene Region.
 2. Set the Region Behavior type to **Trap**.

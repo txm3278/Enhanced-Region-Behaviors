@@ -1,27 +1,22 @@
 const musicSchema = () => {
   return {
     playlistName: new foundry.data.fields.StringField({
-        label: game.i18n?.localize('enhanced-region-behavior.MusicPlaylistLabel'),
         required: false,
         initial: '',
       }),
       songNames: new foundry.data.fields.StringField({
-        label: game.i18n?.localize('enhanced-region-behavior.MusicSongNamesLabel'),
         required: false,
         initial: '',
       }),
       playAll: new foundry.data.fields.BooleanField({
-        label: game.i18n?.localize('enhanced-region-behavior.MusicPlayAllLabel'),
         required: true,
         initial: false,
       }),
       stop: new foundry.data.fields.BooleanField({
-        label: game.i18n?.localize('enhanced-region-behavior.MusicStopLabel'),
         required: true,
         initial: true,
       }),
       playPlaylist: new foundry.data.fields.BooleanField({
-        label: game.i18n?.localize('enhanced-region-behavior.MusicPlayPlaylistLabel'),
         required: true,
         initial: false,
       }),
@@ -32,6 +27,8 @@ type musicSchema = ReturnType<typeof musicSchema>;
 
 export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<musicSchema> {
+
+  static LOCALIZATION_PREFIXES = ["enhanced-region-behavior.Regions.Music"];
 
   static defineSchema() {
       return {

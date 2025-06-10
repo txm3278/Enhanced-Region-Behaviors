@@ -1,22 +1,81 @@
 {
   "enhanced-region-behavior": {
-    "TrapDamageLabel": "Damage",
-    "TrapSavedDamageLabel": "Damage if Saved",
-    "TrapSaveDCLabel": "Save DC",
-    "TrapSaveAbilityLabel": "Save Ability",
-    "TrapDamageTypeLabel": "Damage Type",
     "TrapDamageMessage": "{name} triggered a trap and took {damage} {type} damage!",
     "TrapAvoidedMessage": "{name} dodged a trap and took a reduced {damage} {type} damage!",
-    "TrapSaveFailedMessageLabel": "Save Failed Message",
-    "TrapSaveSuccessMessageLabel": "Save Success Message",
-    "TrapDisableAfterTriggerLabel": "Disable After Trigger",
-    "MusicPlaylistLabel": "Playlist Name (optional)",
-    "MusicSongNamesLabel": "Song Names (comma separated)",
-    "MusicPlayAllLabel": "Play All Songs",
-    "MusicStopLabel": "Stop All Current Music",
-    "MusicPlayPlaylistLabel": "Play Full Playlist",
-    "SoundEffectVolumeLabel": "Volume",
-    "SoundEffectPathLabel": "Path to sound file or sequencer effect"
+    "Regions": {
+      "Trap": {
+        "FIELDS": {
+          "saveDC": {
+            "label": "Save DC",
+            "hint": "The DC for the saving throw against the trap's damage."
+          },
+          "saveAbility": {
+            "label": "Save Ability",
+            "hint": "The ability used for the saving throw against the trap's damage."
+          },
+          "damage": {
+            "label": "Damage",
+            "hint": "The amount of damage the trap deals when triggered."
+          },
+          "savedDamage": {
+            "label": "Damage if Saved",
+            "hint": "The amount of damage the trap deals if the saving throw is successful."
+          },
+          "damageType": {
+            "label": "Damage Type",
+            "hint": "The type of damage dealt by the trap (e.g., fire, cold, acid)."
+          },
+          "saveFailedMessage": {
+            "label": "Save Failed Message",
+            "hint": "Message displayed when the saving throw fails."
+          },
+          "saveSucceededMessage": {
+            "label": "Save Success Message",
+            "hint": "Message displayed when the saving throw succeeds."
+          },
+          "disableAfterTrigger": {
+            "label": "Disable After Trigger",
+            "hint": "If enabled, the trap will be disabled after it is triggered once."
+          }
+        }
+      },
+      "Music": {
+        "FIELDS": {
+          "playlistName": {
+            "label": "Playlist Name",
+            "hint": "The name of the music playlist find songs in."
+          },
+          "songNames": {
+            "label": "Song Names",
+            "hint": "Comma-separated list of song names to play."
+          },
+          "playAll": {
+            "label": "Play All Songs",
+            "hint": "If enabled, all songs will be played simultaneously."
+          },
+          "stop": {
+            "label": "Stop Current Music",
+            "hint": "If enabled, all currently playing music will be stopped before starting new music."
+          },
+          "playPlaylist": {
+            "label": "Play Full Playlist",
+            "hint": "If enabled, the full playlist will be played instead of songs."
+          }
+        }
+      },
+      "SoundEffect": {
+        "FIELDS": {
+          "volume": {
+            "label": "Volume",
+            "hint": "The volume level for the sound effect (0-1)."
+          },
+          "soundPath": {
+            "label": "Path to Sound File",
+            "hint": "The path to the sound file or sequencer effect to play."
+          }
+        }
+      }
+    }
   },
   "TYPES": {
     "RegionBehavior": {
