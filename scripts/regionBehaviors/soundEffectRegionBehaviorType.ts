@@ -32,6 +32,7 @@ export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
           CONST.REGION_EVENTS.TOKEN_TURN_START,
           CONST.REGION_EVENTS.TOKEN_TURN_END,
           CONST.REGION_EVENTS.TOKEN_MOVE_WITHIN,
+          "regionClicked", // Custom event for region clicks
         ],
       }),
       ...soundEffectSchema(),

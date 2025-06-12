@@ -4,6 +4,7 @@
     "TrapAvoidedMessage": "{name} dodged a trap and took a reduced {damage} {type} damage!",
     "TrapSavingThrowMessage": "Saving Throw",
     "TrapDamageRollMessage": "Trap Damage Roll",
+    "regionClickedLabel": "Region Clicked",
     "Regions": {
       "Trap": {
         "FIELDS": {

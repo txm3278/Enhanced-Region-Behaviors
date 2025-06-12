@@ -22,8 +22,8 @@
     "@foundryvtt/foundryvtt-cli": "^1.1.0"
   },
   "devDependencies": {
-    "dnd5e-types": "github:adriangaro/dnd5e-types#main",
     "@eslint/js": "^9.28.0",
+    "dnd5e-types": "github:adriangaro/dnd5e-types#main",
     "eslint": "^9.28.0",
     "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
     "sequencer": "github:fantasycalendar/FoundryVTT-Sequencer",
