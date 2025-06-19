@@ -21,7 +21,8 @@
         "RegionBehavior": {
             "Trap": {},
             "Music": {},
-            "SoundEffect": {}
+            "SoundEffect": {},
+            "VisualEffect": {}
         }
     },
   "esmodules": [
