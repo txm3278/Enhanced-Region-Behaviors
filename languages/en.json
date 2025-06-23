@@ -109,6 +109,14 @@
             "hint": "If enabled, the visual effect will be played at the location of the token that triggered it."
           }
         }
+      },
+      "Elevation": {
+        "FIELDS": {
+          "elevation": {
+            "label": "Elevation",
+            "hint": "The elevation to set for tokens entering this region."
+          }
+        }
       }
     }
   },
@@ -118,7 +126,8 @@
         "Trap": "Trap",
         "Music": "Music",
         "SoundEffect": "Sound Effect",
-        "VisualEffect": "Visual Effect"
+        "VisualEffect": "Visual Effect",
+        "Elevation": "Elevation"
       }
     }
   }

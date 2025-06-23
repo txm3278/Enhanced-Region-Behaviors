@@ -2,12 +2,14 @@ import { TrapRegionBehaviorType } from './regionBehaviors/trapRegionBehaviorType
 import { MusicRegionBehaviorType } from './regionBehaviors/musicRegionBehaviorType.ts';
 import { SoundEffectRegionBehaviorType } from './regionBehaviors/soundEffectRegionBehaviorType.ts';
 import { VisualEffectRegionBehaviorType } from './regionBehaviors/visualEffectRegionBehaviorType.ts';
+import { ElevationRegionBehaviorType } from './regionBehaviors/elevationRegionBehaviorType.ts';
 import { registerClickEvent } from './events.ts';
 
 const TRAP_TYPE = 'enhanced-region-behavior.Trap';
 const MUSIC_TYPE = 'enhanced-region-behavior.Music';
 const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.SoundEffect';
 const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.VisualEffect';
+const ELEVATION_TYPE = 'enhanced-region-behavior.Elevation';
 
 Hooks.once('init', () => {
   console.log('enhanced-region-behavior | Initializing Trap Region Behavior');
@@ -35,6 +37,8 @@ Hooks.once('init', () => {
     // @ts-expect-error Created by foundry
     delete game.model?.RegionBehavior[VISUAL_EFFECT_TYPE];
   }
+  CONFIG.RegionBehavior.dataModels[ELEVATION_TYPE] = ElevationRegionBehaviorType;
+  CONFIG.RegionBehavior.typeIcons[ELEVATION_TYPE] = 'fa-solid fa-arrow-up-from-ground-water';
 });
 
 Hooks.once('i18nInit', () => {

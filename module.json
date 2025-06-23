@@ -22,7 +22,8 @@
             "Trap": {},
             "Music": {},
             "SoundEffect": {},
-            "VisualEffect": {}
+            "VisualEffect": {},
+            "Elevation": {}
         }
     },
   "esmodules": [

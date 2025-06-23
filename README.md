@@ -7,6 +7,8 @@ Enhanced Region Behavior is a Foundry VTT module that adds powerful new automati
 - **Trap Regions**: Automatically roll saving throws and apply damage to tokens that enter, exit, or move within a region. Supports D&D 5e abilities and damage types, with optional MidiQOL integration for advanced automation.
 - **Music Regions**: Play specific songs or playlists, or stop all music, when tokens interact with a region. Supports playing all songs or just the first match.
 - **Sound Effect Regions**: Play a sound effect or sequencer effect when a region is triggered. Supports volume control and integration with the Sequencer module if available.
+- **Visual Effect Regions**: Automatically play an image or animation effect when tokens interact with a region. Supports static images and animated files, with options for duration, scale, display layer. Requires Sequencer
+- **Elevation Regions**: Automatically set the elevation of tokens when they enter or exit a region.
 
 ## Requirements
 
@@ -49,7 +51,7 @@ You can install Enhanced Region Behavior using either of the following methods:
    - **Save Failed/Success Message**: Custom chat messages.
    - **Disable After Trigger**: If enabled, the region disables itself after triggering.
 
-When a token triggers the region, the module will roll the saving throw and apply damage automatically.
+When a token triggers the region, the module will roll the saving throw and apply damage.
 
 **MidiQOL Integration:**
 If the [MidiQOL](https://foundryvtt.com/packages/midi-qol) module is installed and enabled, Enhanced Region Behavior will use MidiQOL's workflow to handle saving throws and damage rolls for trap regions. This allows for advanced automation, including applying effects, rolling chat cards, and integrating with other automation modules. If MidiQOL is not present, the module will use Foundry's built-in mechanics for saves and damage.
@@ -86,6 +88,13 @@ If the Sequencer module is active, it will be used for playback; otherwise, Foun
    - **Scale**: (Optional) Scale the effect.
    - **Below Tokens**: (Optional) Display the effect below tokens.
    - **Play At Token Location**: (Optional) Play the effect at the triggering token's location instead of the region's shape.
+
+### Elevation Regions
+
+1. Create or edit a Scene Region.
+2. Set the Region Behavior type to **Elevation**.
+3. Configure the elevation options:
+   - **Elevation**: The elevation value to set for any token that triggers the region (e.g., `10`).
 
 ### Region Clicked Event
 
