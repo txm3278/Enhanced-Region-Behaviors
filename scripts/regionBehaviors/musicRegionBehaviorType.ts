@@ -1,25 +1,25 @@
 const musicSchema = () => {
   return {
     playlistName: new foundry.data.fields.StringField({
-        required: false,
-        initial: '',
-      }),
-      songNames: new foundry.data.fields.StringField({
-        required: false,
-        initial: '',
-      }),
-      playAll: new foundry.data.fields.BooleanField({
-        required: true,
-        initial: false,
-      }),
-      stop: new foundry.data.fields.BooleanField({
-        required: true,
-        initial: true,
-      }),
-      playPlaylist: new foundry.data.fields.BooleanField({
-        required: true,
-        initial: false,
-      }),
+      required: false,
+      initial: '',
+    }),
+    songNames: new foundry.data.fields.StringField({
+      required: false,
+      initial: '',
+    }),
+    playAll: new foundry.data.fields.BooleanField({
+      required: true,
+      initial: false,
+    }),
+    stop: new foundry.data.fields.BooleanField({
+      required: true,
+      initial: true,
+    }),
+    playPlaylist: new foundry.data.fields.BooleanField({
+      required: true,
+      initial: false,
+    }),
   };
 };
 
@@ -27,31 +27,36 @@ type musicSchema = ReturnType<typeof musicSchema>;
 
 export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<musicSchema> {
-
-  static LOCALIZATION_PREFIXES = ["enhanced-region-behavior.Regions.Music"];
+  static LOCALIZATION_PREFIXES = ['enhanced-region-behavior.Regions.Music'];
 
   static defineSchema() {
-      return {
-        events: this._createEventsField({
-          events: [
-            CONST.REGION_EVENTS.TOKEN_ENTER,
-            CONST.REGION_EVENTS.TOKEN_EXIT,
-            CONST.REGION_EVENTS.TOKEN_MOVE_IN,
-            CONST.REGION_EVENTS.TOKEN_MOVE_OUT,
-            CONST.REGION_EVENTS.TOKEN_TURN_START,
-            CONST.REGION_EVENTS.TOKEN_TURN_END,
-            CONST.REGION_EVENTS.TOKEN_ROUND_START,
-            CONST.REGION_EVENTS.TOKEN_ROUND_END,
-          ],
-        }),
-        ...musicSchema(),
-      };
-    }
+    return {
+      events: this._createEventsField({
+        events: [
+          CONST.REGION_EVENTS.TOKEN_ENTER,
+          CONST.REGION_EVENTS.TOKEN_EXIT,
+          CONST.REGION_EVENTS.TOKEN_ANIMATE_IN,
+          CONST.REGION_EVENTS.TOKEN_ANIMATE_OUT,
+          CONST.REGION_EVENTS.TOKEN_MOVE_IN,
+          CONST.REGION_EVENTS.TOKEN_MOVE_OUT,
+          CONST.REGION_EVENTS.TOKEN_TURN_START,
+          CONST.REGION_EVENTS.TOKEN_TURN_END,
+          CONST.REGION_EVENTS.TOKEN_ROUND_START,
+          CONST.REGION_EVENTS.TOKEN_ROUND_END,
+        ],
+      }),
+      ...musicSchema(),
+    };
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async _handleRegionEvent(_event: RegionDocument.RegionEvent) {
     const playlistName = this.playlistName?.trim();
-    const songNames = this.songNames?.split(',').map(s => s.trim()).filter(Boolean) ?? [];
+    const songNames =
+      this.songNames
+        ?.split(',')
+        .map((s) => s.trim())
+        .filter(Boolean) ?? [];
     const playAll = !!this.playAll;
     const stop = !!this.stop;
     const playPlaylist = !!this.playPlaylist;
@@ -62,7 +67,9 @@ export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     // If no playlist specified, search all playlists for the songs
-    const playlistsToSearch = playlist ? [playlist] : (game.playlists?.contents ?? []);
+    const playlistsToSearch = playlist
+      ? [playlist]
+      : game.playlists?.contents ?? [];
 
     // Find requested songs
     const foundSongs: PlaylistSound[] = [];

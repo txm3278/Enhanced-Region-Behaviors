@@ -81,6 +81,8 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
         events: [
           CONST.REGION_EVENTS.TOKEN_ENTER,
           CONST.REGION_EVENTS.TOKEN_EXIT,
+          CONST.REGION_EVENTS.TOKEN_ANIMATE_IN,
+          CONST.REGION_EVENTS.TOKEN_ANIMATE_OUT,
           CONST.REGION_EVENTS.TOKEN_MOVE_IN,
           CONST.REGION_EVENTS.TOKEN_MOVE_OUT,
           CONST.REGION_EVENTS.TOKEN_MOVE_WITHIN,
@@ -170,7 +172,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
           {
             value: damageRoll.total,
             type: this.damageType,
-            properties: new Set()
+            properties: new Set(),
           },
         ]);
       }

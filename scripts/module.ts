@@ -4,7 +4,7 @@ import { SoundEffectRegionBehaviorType } from './regionBehaviors/soundEffectRegi
 import { VisualEffectRegionBehaviorType } from './regionBehaviors/visualEffectRegionBehaviorType.ts';
 import { registerClickEvent } from './events.ts';
 
-const TYPE = 'enhanced-region-behavior.Trap';
+const TRAP_TYPE = 'enhanced-region-behavior.Trap';
 const MUSIC_TYPE = 'enhanced-region-behavior.Music';
 const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.SoundEffect';
 const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.VisualEffect';
@@ -13,11 +13,11 @@ Hooks.once('init', () => {
   console.log('enhanced-region-behavior | Initializing Trap Region Behavior');
   registerClickEvent();
   if (game.system?.id === 'dnd5e') {
-    CONFIG.RegionBehavior.dataModels[TYPE] = TrapRegionBehaviorType;
-    CONFIG.RegionBehavior.typeIcons[TYPE] = 'fa-solid fa-triangle-exclamation';
+    CONFIG.RegionBehavior.dataModels[TRAP_TYPE] = TrapRegionBehaviorType;
+    CONFIG.RegionBehavior.typeIcons[TRAP_TYPE] = 'fa-solid fa-triangle-exclamation';
   } else {
     // @ts-expect-error Created by foundry
-    delete game.model?.RegionBehavior[TYPE];
+    delete game.model?.RegionBehavior[TRAP_TYPE];
   }
 
   CONFIG.RegionBehavior.dataModels[MUSIC_TYPE] = MusicRegionBehaviorType;
@@ -26,10 +26,15 @@ Hooks.once('init', () => {
     SoundEffectRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons[SOUND_EFFECT_TYPE] =
     'fa-solid fa-volume-high';
-  CONFIG.RegionBehavior.dataModels[VISUAL_EFFECT_TYPE] =
-    VisualEffectRegionBehaviorType;
-  CONFIG.RegionBehavior.typeIcons[VISUAL_EFFECT_TYPE] =
-    'fa-solid fa-volume-high';
+  if (game.modules?.get('sequencer')?.active) {
+    CONFIG.RegionBehavior.dataModels[VISUAL_EFFECT_TYPE] =
+      VisualEffectRegionBehaviorType;
+    CONFIG.RegionBehavior.typeIcons[VISUAL_EFFECT_TYPE] =
+      'fa-solid fa-wand-magic-sparkles';
+  } else {
+    // @ts-expect-error Created by foundry
+    delete game.model?.RegionBehavior[VISUAL_EFFECT_TYPE];
+  }
 });
 
 Hooks.once('i18nInit', () => {

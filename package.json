@@ -26,7 +26,7 @@
     "dnd5e-types": "github:adriangaro/dnd5e-types#main",
     "eslint": "^9.29.0",
     "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
-    "sequencer": "github:fantasycalendar/FoundryVTT-Sequencer",
+    "sequencer": "github:fantasycalendar/FoundryVTT-Sequencer#pull/414",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1",
     "vite": "^6.3.5"

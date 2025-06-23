@@ -81,6 +81,34 @@
             "hint": "The path to the sound file or sequencer effect to play."
           }
         }
+      },
+      "VisualEffect": {
+        "FIELDS": {
+          "imagePath": {
+            "label": "Effect Name",
+            "hint": "The name of the visual effect to play, or the path to an image file."
+          },
+          "duration": {
+            "label": "Duration",
+            "hint": "The duration of the visual effect in seconds (set to 0 to play full duration)."
+          },
+          "scale": {
+            "label": "Scale",
+            "hint": "The scale factor for the visual effect (1.0 is normal size)."
+          },
+          "infinite": {
+            "label": "Infinite Duration",
+            "hint": "If enabled, the visual effect will play indefinitely (stopped by Behavior Deactivated)."
+          },
+          "belowTokens": {
+            "label": "Below Tokens",
+            "hint": "If enabled, the visual effect will be displayed below tokens."
+          },
+          "playAtTokenLocation": {
+            "label": "Play at Token Location",
+            "hint": "If enabled, the visual effect will be played at the location of the token that triggered it."
+          }
+        }
       }
     }
   },
@@ -89,7 +117,8 @@
       "enhanced-region-behavior": {
         "Trap": "Trap",
         "Music": "Music",
-        "SoundEffect": "Sound Effect"
+        "SoundEffect": "Sound Effect",
+        "VisualEffect": "Visual Effect"
       }
     }
   }

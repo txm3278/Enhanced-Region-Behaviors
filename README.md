@@ -75,6 +75,26 @@ If the [MidiQOL](https://foundryvtt.com/packages/midi-qol) module is installed a
 
 If the Sequencer module is active, it will be used for playback; otherwise, Foundry's built-in audio will be used.
 
+### Visual Effect Regions (Requires Sequencer)
+
+1. Create or edit a Scene Region.
+2. Set the Region Behavior type to **Visual Effect**.
+3. Configure the visual effect:
+   - **Image or Animation Path**: The file path to an image or animation (e.g., `.webm` or `.png`).
+   - **Duration**: How long the effect should display (in milliseconds). Set to `0` to play the full effect.
+   - **Infinite**: If enabled, the effect will persist until the region is deleted or deactivated.
+   - **Scale**: (Optional) Scale the effect.
+   - **Below Tokens**: (Optional) Display the effect below tokens.
+   - **Play At Token Location**: (Optional) Play the effect at the triggering token's location instead of the region's shape.
+
+### Region Clicked Event
+
+A new custom event, **regionClicked**, is available for all region behaviors.
+This event is triggered when a user clicks inside a region on the canvas.
+You can use this event to trigger certain region behavior (Sound Effect, Visual Effect) in response to a click.
+
+---
+
 ## Localization
 
 Currently, only English is provided. You can add additional languages by creating new files in the `languages/` folder.

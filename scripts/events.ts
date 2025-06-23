@@ -6,8 +6,12 @@ export const registerClickEvent = () => {
   foundry.canvas.layers.TokenLayer.prototype._onClickLeft = function (event) {
     origClickLeft.call(this, event);
     const clickCoords = event.interactionData.origin;
+    if (!clickCoords) {
+      console.warn('No click coordinates found in event:', event);
+      return;
+    }
     const regionsClicked = canvas?.scene?.regions.filter((region) =>
-      region.testPoint({ ...clickCoords, elevation: region.elevation.bottom })
+      region.testPoint({ ...clickCoords, elevation: region.elevation.bottom ?? 0 })
     );
     regionsClicked?.forEach(
       (region) =>
