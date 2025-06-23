@@ -81,6 +81,8 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
         events: [
           CONST.REGION_EVENTS.TOKEN_ENTER,
           CONST.REGION_EVENTS.TOKEN_EXIT,
+          CONST.REGION_EVENTS.TOKEN_ANIMATE_IN,
+          CONST.REGION_EVENTS.TOKEN_ANIMATE_OUT,
           CONST.REGION_EVENTS.TOKEN_MOVE_IN,
           CONST.REGION_EVENTS.TOKEN_MOVE_OUT,
           CONST.REGION_EVENTS.TOKEN_MOVE_WITHIN,
@@ -98,7 +100,13 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     const token = (event.data as { token?: TokenDocument | null }).token;
     if (!token?.actor) return;
 
-    const actor = token.actor;
+    const actor = token.actor as Actor.Known;
+    if (!(actor.type === 'character' || actor.type === 'npc')) {
+      console.warn(
+        `TrapRegionBehaviorType: Actor ${actor.name} (${actor.id}) is not a character or NPC. Skipping trap behavior.`
+      );
+      return;
+    }
 
     // Check if MidiQOL is active
     const midiQOLActive = !!game.modules?.get('midi-qol')?.active;
@@ -160,10 +168,11 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
         );
       } else {
         // Core Foundry/dnd5e damage application
-        await token.actor.applyDamage?.([
+        await actor.applyDamage?.([
           {
             value: damageRoll.total,
             type: this.damageType,
+            properties: new Set(),
           },
         ]);
       }

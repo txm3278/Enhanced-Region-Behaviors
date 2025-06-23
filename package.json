@@ -18,17 +18,17 @@
   },
   "homepage": "https://github.com/txm3278/Enhanced-Region-Behaviors#readme",
   "dependencies": {
-    "@eslint/compat": "^1.2.9",
+    "@eslint/compat": "^1.3.0",
     "@foundryvtt/foundryvtt-cli": "^1.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.28.0",
+    "@eslint/js": "^9.29.0",
     "dnd5e-types": "github:adriangaro/dnd5e-types#main",
-    "eslint": "^9.28.0",
+    "eslint": "^9.29.0",
     "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
-    "sequencer": "github:fantasycalendar/FoundryVTT-Sequencer",
+    "sequencer": "github:fantasycalendar/FoundryVTT-Sequencer#pull/414",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.34.0",
+    "typescript-eslint": "^8.34.1",
     "vite": "^6.3.5"
   }
 }
