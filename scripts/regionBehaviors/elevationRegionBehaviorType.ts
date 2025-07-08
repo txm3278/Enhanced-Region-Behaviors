@@ -12,7 +12,7 @@ type ElevationSchema = ReturnType<typeof elevationSchema>;
 export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<ElevationSchema> {
   static override LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.elevation',
+    'enhanced-region-behavior.Regions.Elevation',
   ];
 
   static override defineSchema() {

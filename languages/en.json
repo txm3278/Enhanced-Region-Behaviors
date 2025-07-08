@@ -10,7 +10,7 @@
       "globalOnChangeHint": "Enabling this will allow the onChange event to be selected for all region behaviors. Some behaviors may break with this event enabled, so use with caution."
     },
     "Regions": {
-      "trap": {
+      "Trap": {
         "FIELDS": {
           "saveDC": {
             "label": "Save DC",
@@ -50,7 +50,7 @@
           }
         }
       },
-      "music": {
+      "Music": {
         "FIELDS": {
           "playlistName": {
             "label": "Playlist Name",
@@ -74,7 +74,7 @@
           }
         }
       },
-      "soundEffect": {
+      "SoundEffect": {
         "FIELDS": {
           "volume": {
             "label": "Volume",
@@ -86,7 +86,7 @@
           }
         }
       },
-      "visualEffect": {
+      "VisualEffect": {
         "FIELDS": {
           "imagePath": {
             "label": "Effect Name",
@@ -114,7 +114,7 @@
           }
         }
       },
-      "elevation": {
+      "Elevation": {
         "FIELDS": {
           "elevation": {
             "label": "Elevation",
@@ -127,11 +127,11 @@
   "TYPES": {
     "RegionBehavior": {
       "enhanced-region-behavior": {
-        "trap": "Trap",
-        "music": "Music",
-        "soundEffect": "Sound Effect",
-        "visualEffect": "Visual Effect",
-        "elevation": "Elevation"
+        "Trap": "Trap",
+        "Music": "Music",
+        "SoundEffect": "Sound Effect",
+        "VisualEffect": "Visual Effect",
+        "Elevation": "Elevation"
       }
     }
   }

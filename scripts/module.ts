@@ -6,15 +6,17 @@ import { ElevationRegionBehaviorType } from './regionBehaviors/elevationRegionBe
 import { registerClickEvent } from './events.ts';
 import { registerSettings } from './settings.ts';
 
-const TRAP_TYPE = 'enhanced-region-behavior.trap';
-const MUSIC_TYPE = 'enhanced-region-behavior.music';
-const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.soundEffect';
-const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.visualEffect';
-const ELEVATION_TYPE = 'enhanced-region-behavior.elevation';
+const TRAP_TYPE = 'enhanced-region-behavior.Trap';
+const MUSIC_TYPE = 'enhanced-region-behavior.Music';
+const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.SoundEffect';
+const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.VisualEffect';
+const ELEVATION_TYPE = 'enhanced-region-behavior.Elevation';
 
 Hooks.once('init', () => {
   registerSettings();
-  console.log('enhanced-region-behavior | Initializing Trap Region Behavior');
+  console.log(
+    'enhanced-region-behavior | Initializing Enhanced Region Behaviors'
+  );
   registerClickEvent();
   if (game.system?.id === 'dnd5e') {
     CONFIG.RegionBehavior.dataModels[TRAP_TYPE] = TrapRegionBehaviorType;

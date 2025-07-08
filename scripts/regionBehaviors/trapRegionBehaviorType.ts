@@ -74,7 +74,7 @@ type trapSchema = ReturnType<typeof trapSchema>;
 export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<trapSchema> {
   static override LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.trap',
+    'enhanced-region-behavior.Regions.Trap',
   ];
 
   static override defineSchema() {

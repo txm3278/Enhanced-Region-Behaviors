@@ -19,11 +19,11 @@
   ],
   "documentTypes": {
     "RegionBehavior": {
-      "trap": {},
-      "music": {},
-      "soundEffect": {},
-      "visualEffect": {},
-      "elevation": {}
+      "Trap": {},
+      "Music": {},
+      "SoundEffect": {},
+      "VisualEffect": {},
+      "Elevation": {}
     }
   },
   "esmodules": ["dist/enhanced-region-behavior.mjs"],

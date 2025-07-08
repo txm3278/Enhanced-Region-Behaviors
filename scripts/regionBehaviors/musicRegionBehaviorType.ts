@@ -28,7 +28,7 @@ type musicSchema = ReturnType<typeof musicSchema>;
 export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<musicSchema> {
   static override LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.music',
+    'enhanced-region-behavior.Regions.Music',
   ];
 
   static override defineSchema() {

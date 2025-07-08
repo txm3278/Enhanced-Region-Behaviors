@@ -32,7 +32,7 @@ type ShowVisualSchema = typeof showVisualSchema;
 export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<ShowVisualSchema> {
   static override LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.visualEffect',
+    'enhanced-region-behavior.Regions.VisualEffect',
   ];
 
   static override defineSchema() {

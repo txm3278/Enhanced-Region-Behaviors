@@ -19,7 +19,7 @@ type soundEffectSchema = ReturnType<typeof soundEffectSchema>;
 export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<soundEffectSchema> {
   static override LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.soundEffect',
+    'enhanced-region-behavior.Regions.SoundEffect',
   ];
 
   static override defineSchema() {
