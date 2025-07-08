@@ -31,11 +31,11 @@ type ShowVisualSchema = typeof showVisualSchema;
 
 export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<ShowVisualSchema> {
-  static LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.VisualEffect',
+  static override LOCALIZATION_PREFIXES = [
+    'enhanced-region-behavior.Regions.visualEffect',
   ];
 
-  static defineSchema() {
+  static override defineSchema() {
     return {
       events: this._createEventsField({
         events: [
@@ -58,11 +58,10 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
     };
   }
 
-  async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+  override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
     const regionDoc = event.region;
-    const behaviorId = this.parent.id;
-    if (!regionDoc) return;
-    const sequencerActive = game.modules?.get('sequencer')?.active;
+    const behaviorId = this.parent.id ?? '0';
+    const sequencerActive = game.modules?.get('sequencer').active;
     if (!sequencerActive) {
       ui.notifications?.warn(
         'The Sequencer module is required for visual effects.'
@@ -100,7 +99,7 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
 
       if (!infinite) {
         seq.duration(duration);
-      } else if (infinite) {
+      } else {
         seq.persist();
       }
       if (this.belowTokens) {
@@ -108,7 +107,7 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
       }
       await seq.play();
     } else {
-      if (regionDoc.shapes?.length > 0) {
+      if (regionDoc.shapes.length > 0) {
         for (const shape of regionDoc.shapes as unknown as [
           | foundry.data.RectangleShapeData
           | foundry.data.PolygonShapeData
@@ -138,10 +137,14 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
                 ? shape.points.reduce(
                     (arr: [number, number][], _val, idx, src) => {
                       if (idx % 2 === 0 && src[idx + 1] !== undefined) {
-                        arr.push([
-                          src[idx] - sequencerCenter.x,
-                          src[idx + 1] - sequencerCenter.y,
-                        ]);
+                        const x = src[idx];
+                        const y = src[idx + 1];
+                        if (x && y) {
+                          arr.push([
+                            x - sequencerCenter.x,
+                            y - sequencerCenter.y,
+                          ]);
+                        }
                       }
                       return arr;
                     },
@@ -197,26 +200,24 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
             };
           }
 
-          if (sequencerShape && sequencerOptions) {
-            const seq = new Sequence()
-              .effect()
-              .file(imagePath)
-              .name(`VisualEffectRegion-${behaviorId}`)
-              .shape(sequencerShape, sequencerOptions)
-              .tieToDocuments([regionDoc])
-              .atLocation(sequencerCenter)
-              .size(sequencerSize)
-              .scale(this.scale ?? 1);
-            if (!infinite) {
-              seq.duration(duration);
-            } else if (infinite) {
-              seq.persist();
-            }
-            if (this.belowTokens) {
-              seq.belowTokens();
-            }
-            await seq.play();
+          const seq = new Sequence()
+            .effect()
+            .file(imagePath)
+            .name(`VisualEffectRegion-${behaviorId}`)
+            .shape(sequencerShape, sequencerOptions)
+            .tieToDocuments([regionDoc])
+            .atLocation(sequencerCenter)
+            .size(sequencerSize)
+            .scale(this.scale ?? 1);
+          if (!infinite) {
+            seq.duration(duration);
+          } else {
+            seq.persist();
           }
+          if (this.belowTokens) {
+            seq.belowTokens();
+          }
+          await seq.play();
         }
       }
     }

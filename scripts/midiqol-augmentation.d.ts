@@ -24,12 +24,42 @@ declare global {
   };
 }
 
-declare module "fvtt-types/configuration" {
-    interface DataModelConfig {
-        RegionBehavior: {
-            YourType: TrapRegionBehaviorType;
-        }
-    }
+declare namespace MidiQOL {
+  class Workflow {
+    constructor(
+      actor: Actor,
+      item: Item,
+      itemCardId: string,
+      targetUuids: string[],
+      options?: Record<string, unknown>
+    );
+
+    actor: Actor;
+    item: Item;
+    itemCardId: string;
+    targets: Set<TokenDocument>;
+    hitTargets: Set<TokenDocument>;
+    failedSaves: Set<TokenDocument>;
+    passedSaves: Set<TokenDocument>;
+    damageRoll: Roll | null;
+    attackRoll: Roll | null;
+    isCritical: boolean;
+    isFumble: boolean;
+    advantage: boolean;
+    disadvantage: boolean;
+    options: Record<string, unknown>;
+    uuid: string;
+
+    // Methods
+    next(): Promise<void>;
+    complete(): Promise<void>;
+    applyDamage(
+      damageDetail: { damage: number; type: string }[],
+      totalDamage: number,
+      targets: Set<TokenDocument> | TokenDocument[],
+      options?: Record<string, unknown>
+    ): Promise<void>;
+  }
 }
 
 export {};

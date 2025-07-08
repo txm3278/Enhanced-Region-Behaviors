@@ -27,9 +27,11 @@ type musicSchema = ReturnType<typeof musicSchema>;
 
 export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<musicSchema> {
-  static LOCALIZATION_PREFIXES = ['enhanced-region-behavior.Regions.Music'];
+  static override LOCALIZATION_PREFIXES = [
+    'enhanced-region-behavior.Regions.music',
+  ];
 
-  static defineSchema() {
+  static override defineSchema() {
     return {
       events: this._createEventsField({
         events: [
@@ -50,13 +52,12 @@ export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async _handleRegionEvent(_event: RegionDocument.RegionEvent) {
-    const playlistName = this.playlistName?.trim();
-    const songNames =
-      this.songNames
-        ?.split(',')
-        .map((s) => s.trim())
-        .filter(Boolean) ?? [];
+  override async _handleRegionEvent(_event: RegionDocument.RegionEvent) {
+    const playlistName = this.playlistName.trim();
+    const songNames = this.songNames
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean);
     const playAll = !!this.playAll;
     const stop = !!this.stop;
     const playPlaylist = !!this.playPlaylist;
@@ -105,7 +106,9 @@ export class MusicRegionBehaviorType extends foundry.data.regionBehaviors
       }
     } else {
       // Play only the first song
-      await foundSongs[0].update({ playing: true, pausedTime: 0 });
+      if (foundSongs[0]) {
+        await foundSongs[0].update({ playing: true, pausedTime: 0 });
+      }
     }
   }
 }

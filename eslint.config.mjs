@@ -1,5 +1,4 @@
 import js from '@eslint/js';
-import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -7,24 +6,18 @@ export default tseslint.config(
   {
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
+      ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: {
-        MidiQOL: 'readonly',
-        ...globals.browser,
-      },
+      ecmaVersion: 'latest',
       parserOptions: {
-        project: ['./tsconfig.json'],
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    plugins: {
-    },
-    rules: {
-    },
+    plugins: {},
+    rules: {},
   }
 );

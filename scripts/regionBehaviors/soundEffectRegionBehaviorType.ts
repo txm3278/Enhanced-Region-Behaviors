@@ -18,11 +18,11 @@ type soundEffectSchema = ReturnType<typeof soundEffectSchema>;
 
 export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<soundEffectSchema> {
-  static LOCALIZATION_PREFIXES = [
-    'enhanced-region-behavior.Regions.SoundEffect',
+  static override LOCALIZATION_PREFIXES = [
+    'enhanced-region-behavior.Regions.soundEffect',
   ];
 
-  static defineSchema() {
+  static override defineSchema() {
     return {
       events: this._createEventsField({
         events: [
@@ -43,8 +43,8 @@ export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async _handleRegionEvent(_event: RegionDocument.RegionEvent) {
-    const soundPath = this.soundPath?.trim();
+  override async _handleRegionEvent(_event: RegionDocument.RegionEvent) {
+    const soundPath = this.soundPath.trim();
     const volume = typeof this.volume === 'number' ? this.volume : 0.8;
 
     if (!soundPath) {
@@ -53,7 +53,7 @@ export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     // Use Sequencer if the module is active
-    const sequencerActive = game.modules?.get('sequencer')?.active;
+    const sequencerActive = game.modules?.get('sequencer').active;
     if (sequencerActive && typeof Sequence !== 'undefined') {
       try {
         await new Sequence().sound().file(soundPath).volume(volume).play();

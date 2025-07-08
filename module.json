@@ -18,17 +18,15 @@
     }
   ],
   "documentTypes": {
-        "RegionBehavior": {
-            "Trap": {},
-            "Music": {},
-            "SoundEffect": {},
-            "VisualEffect": {},
-            "Elevation": {}
-        }
-    },
-  "esmodules": [
-    "dist/enhanced-region-behavior.mjs"
-  ],
+    "RegionBehavior": {
+      "trap": {},
+      "music": {},
+      "soundEffect": {},
+      "visualEffect": {},
+      "elevation": {}
+    }
+  },
+  "esmodules": ["dist/enhanced-region-behavior.mjs"],
   "languages": [
     {
       "lang": "en",

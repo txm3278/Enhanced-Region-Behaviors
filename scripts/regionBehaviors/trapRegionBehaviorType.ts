@@ -73,9 +73,11 @@ type trapSchema = ReturnType<typeof trapSchema>;
 
 export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<trapSchema> {
-  static LOCALIZATION_PREFIXES = ['enhanced-region-behavior.Regions.Trap'];
+  static override LOCALIZATION_PREFIXES = [
+    'enhanced-region-behavior.Regions.trap',
+  ];
 
-  static defineSchema() {
+  static override defineSchema() {
     return {
       events: this._createEventsField({
         events: [
@@ -96,20 +98,22 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     };
   }
 
-  async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+  override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
     const token = (event.data as { token?: TokenDocument | null }).token;
     if (!token?.actor) return;
 
     const actor = token.actor as Actor.Known;
     if (!(actor.type === 'character' || actor.type === 'npc')) {
       console.warn(
-        `TrapRegionBehaviorType: Actor ${actor.name} (${actor.id}) is not a character or NPC. Skipping trap behavior.`
+        `TrapRegionBehaviorType: Actor ${actor.name} (${
+          actor.id ?? ''
+        }) is not a character or NPC. Skipping trap behavior.`
       );
       return;
     }
 
     // Check if MidiQOL is active
-    const midiQOLActive = !!game.modules?.get('midi-qol')?.active;
+    const midiQOLActive = !!game.modules?.get('midi-qol').active;
 
     // Roll saving throw
     let saveTotal = 0;
@@ -118,7 +122,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
         ability: this.saveAbility,
       });
       saveTotal = saveRoll?.[0]?.total ?? 0;
-    } else if (actor.system?.abilities?.[this.saveAbility]?.save) {
+    } else {
       // Core dnd5e roll
       const ability = this.saveAbility;
       const saveData = actor.system.abilities[ability];
@@ -128,21 +132,13 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
       }).roll();
       await roll.toMessage({
         speaker: ChatMessage.getSpeaker({ token }),
-        flavor: `${this.saveAbility} ${game.i18n?.localize(
-          'enhanced-region-behavior.TrapSavingThrowMessage'
-        )}`,
+        flavor: `${this.saveAbility} ${
+          game.i18n?.localize(
+            'enhanced-region-behavior.TrapSavingThrowMessage'
+          ) ?? 'Saving Throw'
+        }`,
       });
-      saveTotal = roll.total ?? 0;
-    } else {
-      // Fallback: just roll 1d20
-      const roll = await new Roll('1d20').roll();
-      await roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ token }),
-        flavor: `${this.saveAbility} ${game.i18n?.localize(
-          'enhanced-region-behavior.TrapSavingThrowMessage'
-        )}`,
-      });
-      saveTotal = roll.total ?? 0;
+      saveTotal = roll.total;
     }
 
     const saved = saveTotal > (this.saveDC ?? 0);
@@ -158,7 +154,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     });
 
     if (this.automateDamage && damageRoll.total > 0) {
-      if (midiQOLActive && typeof MidiQOL?.applyTokenDamage === 'function') {
+      if (midiQOLActive && typeof MidiQOL.applyTokenDamage === 'function') {
         await MidiQOL.applyTokenDamage(
           [{ damage: damageRoll.total, type: this.damageType }],
           damageRoll.total,
@@ -168,7 +164,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
         );
       } else {
         // Core Foundry/dnd5e damage application
-        await actor.applyDamage?.([
+        await actor.applyDamage([
           {
             value: damageRoll.total,
             type: this.damageType,
@@ -197,7 +193,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
 
   interpolate(template: string, data: Record<string, string>) {
     return template.replace(/{(\w+)}/g, (fullMatch, key: string) => {
-      return key in data ? data[key] : fullMatch;
+      return key in data ? data[key] ?? fullMatch : fullMatch;
     });
   }
 }

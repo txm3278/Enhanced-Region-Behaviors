@@ -5,8 +5,12 @@
     "TrapSavingThrowMessage": "Saving Throw",
     "TrapDamageRollMessage": "Trap Damage Roll",
     "regionClickedLabel": "Region Clicked",
+    "Settings": {
+      "globalOnChangeName": "Enable onChange Event on all Region Behaviors",
+      "globalOnChangeHint": "Enabling this will allow the onChange event to be selected for all region behaviors. Some behaviors may break with this event enabled, so use with caution."
+    },
     "Regions": {
-      "Trap": {
+      "trap": {
         "FIELDS": {
           "saveDC": {
             "label": "Save DC",
@@ -46,7 +50,7 @@
           }
         }
       },
-      "Music": {
+      "music": {
         "FIELDS": {
           "playlistName": {
             "label": "Playlist Name",
@@ -70,7 +74,7 @@
           }
         }
       },
-      "SoundEffect": {
+      "soundEffect": {
         "FIELDS": {
           "volume": {
             "label": "Volume",
@@ -82,7 +86,7 @@
           }
         }
       },
-      "VisualEffect": {
+      "visualEffect": {
         "FIELDS": {
           "imagePath": {
             "label": "Effect Name",
@@ -110,7 +114,7 @@
           }
         }
       },
-      "Elevation": {
+      "elevation": {
         "FIELDS": {
           "elevation": {
             "label": "Elevation",
@@ -123,11 +127,11 @@
   "TYPES": {
     "RegionBehavior": {
       "enhanced-region-behavior": {
-        "Trap": "Trap",
-        "Music": "Music",
-        "SoundEffect": "Sound Effect",
-        "VisualEffect": "Visual Effect",
-        "Elevation": "Elevation"
+        "trap": "Trap",
+        "music": "Music",
+        "soundEffect": "Sound Effect",
+        "visualEffect": "Visual Effect",
+        "elevation": "Elevation"
       }
     }
   }

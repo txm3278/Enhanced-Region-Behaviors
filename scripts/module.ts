@@ -4,21 +4,23 @@ import { SoundEffectRegionBehaviorType } from './regionBehaviors/soundEffectRegi
 import { VisualEffectRegionBehaviorType } from './regionBehaviors/visualEffectRegionBehaviorType.ts';
 import { ElevationRegionBehaviorType } from './regionBehaviors/elevationRegionBehaviorType.ts';
 import { registerClickEvent } from './events.ts';
+import { registerSettings } from './settings.ts';
 
-const TRAP_TYPE = 'enhanced-region-behavior.Trap';
-const MUSIC_TYPE = 'enhanced-region-behavior.Music';
-const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.SoundEffect';
-const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.VisualEffect';
-const ELEVATION_TYPE = 'enhanced-region-behavior.Elevation';
+const TRAP_TYPE = 'enhanced-region-behavior.trap';
+const MUSIC_TYPE = 'enhanced-region-behavior.music';
+const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.soundEffect';
+const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.visualEffect';
+const ELEVATION_TYPE = 'enhanced-region-behavior.elevation';
 
 Hooks.once('init', () => {
+  registerSettings();
   console.log('enhanced-region-behavior | Initializing Trap Region Behavior');
   registerClickEvent();
   if (game.system?.id === 'dnd5e') {
     CONFIG.RegionBehavior.dataModels[TRAP_TYPE] = TrapRegionBehaviorType;
-    CONFIG.RegionBehavior.typeIcons[TRAP_TYPE] = 'fa-solid fa-triangle-exclamation';
+    CONFIG.RegionBehavior.typeIcons[TRAP_TYPE] =
+      'fa-solid fa-triangle-exclamation';
   } else {
-    // @ts-expect-error Created by foundry
     delete game.model?.RegionBehavior[TRAP_TYPE];
   }
 
@@ -28,19 +30,26 @@ Hooks.once('init', () => {
     SoundEffectRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons[SOUND_EFFECT_TYPE] =
     'fa-solid fa-volume-high';
-  if (game.modules?.get('sequencer')?.active) {
+  if (game.modules?.get('sequencer').active) {
     CONFIG.RegionBehavior.dataModels[VISUAL_EFFECT_TYPE] =
       VisualEffectRegionBehaviorType;
     CONFIG.RegionBehavior.typeIcons[VISUAL_EFFECT_TYPE] =
       'fa-solid fa-wand-magic-sparkles';
   } else {
-    // @ts-expect-error Created by foundry
     delete game.model?.RegionBehavior[VISUAL_EFFECT_TYPE];
   }
-  CONFIG.RegionBehavior.dataModels[ELEVATION_TYPE] = ElevationRegionBehaviorType;
-  CONFIG.RegionBehavior.typeIcons[ELEVATION_TYPE] = 'fa-solid fa-arrow-up-from-ground-water';
+  CONFIG.RegionBehavior.dataModels[ELEVATION_TYPE] =
+    ElevationRegionBehaviorType;
+  CONFIG.RegionBehavior.typeIcons[ELEVATION_TYPE] =
+    'fa-solid fa-arrow-up-from-ground-water';
 });
 
 Hooks.once('i18nInit', () => {
   foundry.helpers.Localization.localizeDataModel(TrapRegionBehaviorType);
+  foundry.helpers.Localization.localizeDataModel(MusicRegionBehaviorType);
+  foundry.helpers.Localization.localizeDataModel(SoundEffectRegionBehaviorType);
+  foundry.helpers.Localization.localizeDataModel(
+    VisualEffectRegionBehaviorType
+  );
+  foundry.helpers.Localization.localizeDataModel(ElevationRegionBehaviorType);
 });

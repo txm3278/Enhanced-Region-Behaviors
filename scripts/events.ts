@@ -1,9 +1,11 @@
 export const registerClickEvent = () => {
-  // @ts-expect-error purposfully extending the prototype
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const origClickLeft = foundry.canvas.layers.TokenLayer.prototype._onClickLeft;
-  // @ts-expect-error purposfully extending the prototype
-  foundry.canvas.layers.TokenLayer.prototype._onClickLeft = function (event) {
+  const origClickLeft =
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    foundry.canvas.layers.TokenLayer.prototype['_onClickLeft'];
+  // eslint-disable-next-line @typescript-eslint/dot-notation
+  foundry.canvas.layers.TokenLayer.prototype['_onClickLeft'] = function (
+    event
+  ) {
     origClickLeft.call(this, event);
     const clickCoords = event.interactionData.origin;
     if (!clickCoords) {
@@ -11,12 +13,16 @@ export const registerClickEvent = () => {
       return;
     }
     const regionsClicked = canvas?.scene?.regions.filter((region) =>
-      region.testPoint({ ...clickCoords, elevation: region.elevation.bottom ?? 0 })
+      region.testPoint({
+        x: clickCoords.x,
+        y: clickCoords.y,
+        elevation: region.elevation.bottom ?? 0,
+      })
     );
     regionsClicked?.forEach(
       (region) =>
-        // @ts-expect-error purposfully extending the prototype
-        void region._handleEvent({
+        // eslint-disable-next-line @typescript-eslint/dot-notation
+        void region['_handleEvent']({
           name: 'regionClicked',
           data: {},
           region,
@@ -30,20 +36,22 @@ export const registerClickEvent = () => {
   };
 
   const origCreateEventsField =
-    // @ts-expect-error purposfully extending the prototype
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    foundry.data.regionBehaviors.RegionBehaviorType._createEventsField;
-  // @ts-expect-error purposfully extending the prototype
-  foundry.data.regionBehaviors.RegionBehaviorType._createEventsField =
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    foundry.data.regionBehaviors.RegionBehaviorType['_createEventsField'];
+  // eslint-disable-next-line @typescript-eslint/dot-notation
+  foundry.data.regionBehaviors.RegionBehaviorType['_createEventsField'] =
     function ({ events, initial } = {}) {
       const field = origCreateEventsField.call(this, { events, initial });
-      if (events?.includes('regionClicked')) {
+      if (
+        game.settings?.get('enhanced-region-behavior', 'globalOnClick') ||
+        events?.includes('regionClicked')
+      ) {
         if (
           field.element.choices &&
           typeof field.element.choices === 'object' &&
           !Array.isArray(field.element.choices)
         ) {
-          field.element.choices.regionClicked =
+          (field.element.choices as Record<string, string>)['regionClicked'] =
             game.i18n?.localize(
               'enhanced-region-behavior.regionClickedLabel'
             ) ?? 'Region Clicked';

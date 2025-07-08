@@ -11,9 +11,11 @@ type ElevationSchema = ReturnType<typeof elevationSchema>;
 
 export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
   .RegionBehaviorType<ElevationSchema> {
-  static LOCALIZATION_PREFIXES = ['enhanced-region-behavior.Regions.Elevation'];
+  static override LOCALIZATION_PREFIXES = [
+    'enhanced-region-behavior.Regions.elevation',
+  ];
 
-  static defineSchema() {
+  static override defineSchema() {
     return {
       events: this._createEventsField({
         events: [
@@ -25,7 +27,7 @@ export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
     };
   }
 
-  async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+  override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
     const token = (event.data as { token?: TokenDocument | null }).token;
     const movement = (
       event.data as {
@@ -40,7 +42,7 @@ export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
     token.stopMovement();
 
     // Await movement animation
-    if (token.rendered) await token.object.movementAnimationPromise;
+    if (token.rendered) await token.object?.movementAnimationPromise;
 
     // Adjust pending movement waypoints
     const adjustedWaypoints = movement.pending.waypoints
