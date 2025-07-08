@@ -6,8 +6,8 @@
     "TrapDamageRollMessage": "Trap Damage Roll",
     "regionClickedLabel": "Region Clicked",
     "Settings": {
-      "globalOnChangeName": "Enable onChange Event on all Region Behaviors",
-      "globalOnChangeHint": "Enabling this will allow the onChange event to be selected for all region behaviors. Some behaviors may break with this event enabled, so use with caution."
+      "globalOnClickName": "Enable onClick Event on all Region Behaviors",
+      "globalOnClickHint": "Enabling this will allow the onClick event to be selected for all region behaviors. Some behaviors may break with this event enabled, so use with caution."
     },
     "Regions": {
       "Trap": {

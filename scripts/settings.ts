@@ -1,10 +1,10 @@
 export function registerSettings() {
   game.settings?.register('enhanced-region-behavior', 'globalOnClick', {
     name: game.i18n?.localize(
-      'enhanced-region-behavior.Settings.globalOnChangeName'
+      'enhanced-region-behavior.Settings.globalOnClickName'
     ),
     hint: game.i18n?.localize(
-      'enhanced-region-behavior.Settings.globalOnChangeHint'
+      'enhanced-region-behavior.Settings.globalOnClickHint'
     ),
     scope: 'world',
     config: true,
