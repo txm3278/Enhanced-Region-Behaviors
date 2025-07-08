@@ -10,11 +10,11 @@ declare module 'fvtt-types/configuration' {
   }
   interface DataModelConfig {
     RegionBehavior: {
-      'enhanced-region-behavior.trap'?: typeof TrapRegionBehaviorType;
-      'enhanced-region-behavior.music': typeof MusicRegionBehaviorType;
-      'enhanced-region-behavior.soundEffect': typeof SoundEffectRegionBehaviorType;
-      'enhanced-region-behavior.visualEffect'?: typeof VisualEffectRegionBehaviorType;
-      'enhanced-region-behavior.elevation': typeof ElevationRegionBehaviorType;
+      'enhanced-region-behavior.Trap'?: typeof TrapRegionBehaviorType;
+      'enhanced-region-behavior.Music': typeof MusicRegionBehaviorType;
+      'enhanced-region-behavior.SoundEffect': typeof SoundEffectRegionBehaviorType;
+      'enhanced-region-behavior.VisualEffect'?: typeof VisualEffectRegionBehaviorType;
+      'enhanced-region-behavior.Elevation': typeof ElevationRegionBehaviorType;
     };
   }
 }
