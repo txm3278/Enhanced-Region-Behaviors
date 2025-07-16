@@ -121,6 +121,26 @@
             "hint": "The elevation to set for tokens entering this region."
           }
         }
+      },
+      "Journal": {
+        "FIELDS": {
+          "journalId": {
+            "label": "Journal ID",
+            "hint": "The unique ID of the journal entry to open. Takes priority over Journal Name if both are provided."
+          },
+          "journalName": {
+            "label": "Journal Name",
+            "hint": "The name of the journal entry to open. Used if Journal ID is not provided."
+          },
+          "journalPageId": {
+            "label": "Journal Page ID",
+            "hint": "For Journal Entries: The specific page ID to show (optional)."
+          },
+          "showToAll": {
+            "label": "Show to All Players",
+            "hint": "If enabled, the journal entry will be shown to all players. Otherwise, only to the triggering player or token owner."
+          }
+        }
       }
     }
   },
@@ -131,7 +151,8 @@
         "Music": "Music",
         "SoundEffect": "Sound Effect",
         "VisualEffect": "Visual Effect",
-        "Elevation": "Elevation"
+        "Elevation": "Elevation",
+        "Journal": "Open Journal"
       }
     }
   }

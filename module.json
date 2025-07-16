@@ -23,7 +23,8 @@
       "Music": {},
       "SoundEffect": {},
       "VisualEffect": {},
-      "Elevation": {}
+      "Elevation": {},
+      "Journal": {}
     }
   },
   "esmodules": ["dist/enhanced-region-behavior.mjs"],

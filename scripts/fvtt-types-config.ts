@@ -1,8 +1,9 @@
 import { TrapRegionBehaviorType } from './regionBehaviors/trapRegionBehaviorType.ts';
-import { MusicRegionBehaviorType } from './regionBehaviors/musicRegionBehaviorType.ts';
+import { MusicRegionBehaviorType, handleMusicRegion } from './regionBehaviors/musicRegionBehaviorType.ts';
 import { SoundEffectRegionBehaviorType } from './regionBehaviors/soundEffectRegionBehaviorType.ts';
 import { VisualEffectRegionBehaviorType } from './regionBehaviors/visualEffectRegionBehaviorType.ts';
 import { ElevationRegionBehaviorType } from './regionBehaviors/elevationRegionBehaviorType.ts';
+import { JournalRegionBehaviorType } from './regionBehaviors/journalRegionBehaviorType.ts';
 
 declare module 'fvtt-types/configuration' {
   interface SettingConfig {
@@ -15,6 +16,12 @@ declare module 'fvtt-types/configuration' {
       'enhanced-region-behavior.SoundEffect': typeof SoundEffectRegionBehaviorType;
       'enhanced-region-behavior.VisualEffect'?: typeof VisualEffectRegionBehaviorType;
       'enhanced-region-behavior.Elevation': typeof ElevationRegionBehaviorType;
+      'enhanced-region-behavior.Journal': typeof JournalRegionBehaviorType;
+    };
+  }
+  interface CONFIG {
+    Queries: {
+      'enhanced-region-behavior.handleMusicRegion': typeof handleMusicRegion;
     };
   }
 }

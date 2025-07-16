@@ -1,4 +1,4 @@
-const showVisualSchema = {
+const visualSchema = {
   imagePath: new foundry.data.fields.StringField({
     required: true,
     initial: '',
@@ -27,10 +27,8 @@ const showVisualSchema = {
   }),
 };
 
-type ShowVisualSchema = typeof showVisualSchema;
-
 export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
-  .RegionBehaviorType<ShowVisualSchema> {
+  .RegionBehaviorType<typeof visualSchema> {
   static override LOCALIZATION_PREFIXES = [
     'enhanced-region-behavior.Regions.VisualEffect',
   ];
@@ -54,11 +52,14 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
         ],
         initial: [CONST.REGION_EVENTS.BEHAVIOR_DEACTIVATED],
       }),
-      ...showVisualSchema,
+      ...visualSchema,
     };
   }
 
   override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+    // The user that initiated the movement handles event
+    if (!event.user.isSelf) return;
+
     const regionDoc = event.region;
     const behaviorId = this.parent.id ?? '0';
     const sequencerActive = game.modules?.get('sequencer').active;
@@ -108,11 +109,7 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
       await seq.play();
     } else {
       if (regionDoc.shapes.length > 0) {
-        for (const shape of regionDoc.shapes as unknown as [
-          | foundry.data.RectangleShapeData
-          | foundry.data.PolygonShapeData
-          | foundry.data.EllipseShapeData
-        ]) {
+        for (const shape of regionDoc.shapes) {
           if (shape.hole) continue; // Skip holes in shapes
           let sequencerShape: Shapes = 'rectangle';
           let sequencerOptions: ShapeOptions = {};

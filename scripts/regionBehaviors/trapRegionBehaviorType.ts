@@ -22,57 +22,49 @@ const DND_DAMAGE_TYPES = {
   thunder: 'thunder',
 };
 
-const trapSchema = () => {
-  return {
-    automateDamage: new foundry.data.fields.BooleanField({
-      required: true,
-      initial: true,
-    }),
-    saveDC: new foundry.data.fields.NumberField({
-      required: true,
-      initial: 15,
-    }),
-    saveAbility: new foundry.data.fields.StringField({
-      required: true,
-      initial: 'dex',
-      choices: DND_ABILITY_SCORES, // Only allow DND ability scores
-    }),
-    damage: new foundry.data.fields.StringField({
-      required: true,
-      initial: '2d6',
-    }),
-    savedDamage: new foundry.data.fields.StringField({
-      required: true,
-      initial: '1d6',
-    }),
-    damageType: new foundry.data.fields.StringField({
-      required: true,
-      initial: 'piercing',
-      choices: DND_DAMAGE_TYPES, // Only allow DND damage types
-    }),
-    saveFailedMessage: new foundry.data.fields.StringField({
-      required: true,
-      initial: game.i18n?.localize(
-        'enhanced-region-behavior.TrapDamageMessage'
-      ),
-    }),
-    saveSucceededMessage: new foundry.data.fields.StringField({
-      required: true,
-      initial: game.i18n?.localize(
-        'enhanced-region-behavior.TrapAvoidedMessage'
-      ),
-    }),
-    disableAfterTrigger: new foundry.data.fields.BooleanField({
-      required: true,
-      initial: true,
-    }),
-  };
+const trapSchema = {
+  automateDamage: new foundry.data.fields.BooleanField({
+    required: true,
+    initial: true,
+  }),
+  saveDC: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 15,
+  }),
+  saveAbility: new foundry.data.fields.StringField({
+    required: true,
+    initial: 'dex',
+    choices: DND_ABILITY_SCORES, // Only allow DND ability scores
+  }),
+  damage: new foundry.data.fields.StringField({
+    required: true,
+    initial: '2d6',
+  }),
+  savedDamage: new foundry.data.fields.StringField({
+    required: true,
+    initial: '1d6',
+  }),
+  damageType: new foundry.data.fields.StringField({
+    required: true,
+    initial: 'piercing',
+    choices: DND_DAMAGE_TYPES, // Only allow DND damage types
+  }),
+  saveFailedMessage: new foundry.data.fields.StringField({
+    required: true,
+    initial: game.i18n?.localize('enhanced-region-behavior.TrapDamageMessage'),
+  }),
+  saveSucceededMessage: new foundry.data.fields.StringField({
+    required: true,
+    initial: game.i18n?.localize('enhanced-region-behavior.TrapAvoidedMessage'),
+  }),
+  disableAfterTrigger: new foundry.data.fields.BooleanField({
+    required: true,
+    initial: true,
+  }),
 };
 
-type trapSchema = ReturnType<typeof trapSchema>;
-
 export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
-  .RegionBehaviorType<trapSchema> {
+  .RegionBehaviorType<typeof trapSchema> {
   static override LOCALIZATION_PREFIXES = [
     'enhanced-region-behavior.Regions.Trap',
   ];
@@ -94,11 +86,14 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
           CONST.REGION_EVENTS.TOKEN_ROUND_END,
         ],
       }),
-      ...trapSchema(),
+      ...trapSchema,
     };
   }
 
   override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+    // Ensure the gm handles the event
+    if(!game.user?.isGM) return;
+
     const token = (event.data as { token?: TokenDocument | null }).token;
     if (!token?.actor) return;
 
@@ -113,7 +108,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     // Check if MidiQOL is active
-    const midiQOLActive = !!game.modules?.get('midi-qol').active;
+    const midiQOLActive = !!game.modules.get('midi-qol').active;
 
     // Roll saving throw
     let saveTotal = 0;
@@ -124,8 +119,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
       saveTotal = saveRoll?.[0]?.total ?? 0;
     } else {
       // Core dnd5e roll
-      const ability = this.saveAbility;
-      const saveData = actor.system.abilities[ability];
+      const saveData = actor.system.abilities[this.saveAbility];
       const roll = await new Roll('1d20 + @mod + @prof', {
         mod: saveData.mod,
         prof: saveData.proficient ? actor.system.attributes.prof : 0,
@@ -133,9 +127,9 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
       await roll.toMessage({
         speaker: ChatMessage.getSpeaker({ token }),
         flavor: `${this.saveAbility} ${
-          game.i18n?.localize(
+          game.i18n.localize(
             'enhanced-region-behavior.TrapSavingThrowMessage'
-          ) ?? 'Saving Throw'
+          )
         }`,
       });
       saveTotal = roll.total;
@@ -148,7 +142,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
 
     await damageRoll.toMessage({
       speaker: ChatMessage.getSpeaker({ token }),
-      flavor: game.i18n?.localize(
+      flavor: game.i18n.localize(
         'enhanced-region-behavior.TrapDamageRollMessage'
       ),
     });

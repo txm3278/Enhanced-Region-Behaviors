@@ -1,16 +1,12 @@
-const elevationSchema = () => {
-  return {
-    elevation: new foundry.data.fields.NumberField({
-      required: true,
-      initial: 0,
-    }),
-  };
+const elevationSchema = {
+  elevation: new foundry.data.fields.NumberField({
+    required: true,
+    initial: 0,
+  }),
 };
 
-type ElevationSchema = ReturnType<typeof elevationSchema>;
-
 export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
-  .RegionBehaviorType<ElevationSchema> {
+  .RegionBehaviorType<typeof elevationSchema> {
   static override LOCALIZATION_PREFIXES = [
     'enhanced-region-behavior.Regions.Elevation',
   ];
@@ -23,20 +19,22 @@ export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
           CONST.REGION_EVENTS.TOKEN_EXIT,
         ],
       }),
-      ...elevationSchema(),
+      ...elevationSchema,
     };
   }
 
   override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+    // The user that initiated the movement handles event
+    if (!event.user.isSelf) return;
+
+    const elevation = typeof this.elevation === 'number' ? this.elevation : 0;
     const token = (event.data as { token?: TokenDocument | null }).token;
     const movement = (
       event.data as {
-        movement?: TokenDocument.TokenMovement | null;
+        movement?: TokenDocument.MovementData | null;
       }
     ).movement;
-    if (!token) return;
-    // The user that initated the movement handles the TOKEN_MOVE_IN event
-    if (!event.user.isSelf) return;
+    if (!token || !movement) return;
 
     // Stop movement. Important: no async operations before this!
     token.stopMovement();
@@ -47,7 +45,7 @@ export class ElevationRegionBehaviorType extends foundry.data.regionBehaviors
     // Adjust pending movement waypoints
     const adjustedWaypoints = movement.pending.waypoints
       .filter((w) => !w.intermediate)
-      .map((w) => ({ ...w, elevation: this.elevation }));
+      .map((w) => ({ ...w, elevation: elevation }));
     await token.move(adjustedWaypoints, {
       ...movement.updateOptions,
       constrainOptions: movement.constrainOptions,

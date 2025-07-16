@@ -1,23 +1,19 @@
-const soundEffectSchema = () => {
-  return {
-    soundPath: new foundry.data.fields.StringField({
-      required: true,
-      initial: '',
-    }),
-    volume: new foundry.data.fields.NumberField({
-      required: false,
-      initial: 0.8,
-      min: 0,
-      max: 1,
-      step: 0.01,
-    }),
-  };
+const soundEffectSchema = {
+  soundPath: new foundry.data.fields.StringField({
+    required: true,
+    initial: '',
+  }),
+  volume: new foundry.data.fields.NumberField({
+    required: false,
+    initial: 0.8,
+    min: 0,
+    max: 1,
+    step: 0.01,
+  }),
 };
 
-type soundEffectSchema = ReturnType<typeof soundEffectSchema>;
-
 export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
-  .RegionBehaviorType<soundEffectSchema> {
+  .RegionBehaviorType<typeof soundEffectSchema> {
   static override LOCALIZATION_PREFIXES = [
     'enhanced-region-behavior.Regions.SoundEffect',
   ];
@@ -38,12 +34,14 @@ export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
           'regionClicked', // Custom event for region clicks
         ],
       }),
-      ...soundEffectSchema(),
+      ...soundEffectSchema,
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  override async _handleRegionEvent(_event: RegionDocument.RegionEvent) {
+  override async _handleRegionEvent(event: RegionDocument.RegionEvent) {
+    // The user that initiated the movement handles event
+    if (!event.user.isSelf) return;
+
     const soundPath = this.soundPath.trim();
     const volume = typeof this.volume === 'number' ? this.volume : 0.8;
 
@@ -67,9 +65,6 @@ export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     // Fallback to Foundry's AudioHelper
-    await foundry.audio.AudioHelper.play(
-      { src: soundPath, volume, loop: false },
-      true
-    );
+    game.socket?.emit('playAudio', { src: soundPath, volume, loop: false });
   }
 }

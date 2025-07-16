@@ -9,11 +9,13 @@ Enhanced Region Behavior is a Foundry VTT module that adds powerful new automati
 - **Sound Effect Regions**: Play a sound effect or sequencer effect when a region is triggered. Supports volume control and integration with the Sequencer module if available.
 - **Visual Effect Regions**: Automatically play an image or animation effect when tokens interact with a region. Supports static images and animated files, with options for duration, scale, display layer. Requires Sequencer
 - **Elevation Regions**: Automatically set the elevation of tokens when they enter or exit a region.
+- **Open Journal Regions**: Automatically open journal or journal page when tokens interact with a region.
 
 ## Requirements
 
 - Foundry VTT v13+
 - D&D 5e system (minimum 5.0.3) (optional, required for Trap Region)
+- [libWrapper](https://foundryvtt.com/packages/lib-wrapper) (optional but highly recommended)
 - [MidiQOL](https://foundryvtt.com/packages/midi-qol) (optional, for advanced trap automation)
 - [Sequencer](https://foundryvtt.com/packages/sequencer) (optional, for advanced sound effects)
 
@@ -95,6 +97,18 @@ If the Sequencer module is active, it will be used for playback; otherwise, Foun
 2. Set the Region Behavior type to **Elevation**.
 3. Configure the elevation options:
    - **Elevation**: The elevation value to set for any token that triggers the region (e.g., `10`).
+
+### Open Journal Regions
+
+1. Create or edit a Scene Region.
+2. Set the Region Behavior type to **Open Journal**.
+3. Configure the journal options:
+   - **Journal ID**: (Optional) The unique ID of the specific journanl to open. Takes priority over Journal Name.
+   - **Journal Name**: (Optional) The name of the journal to open. Used if Journal ID is not provided.
+   - **Journal Page ID**: (Optional) The specific page ID to show within the journal.
+   - **Show to All Players**: If enabled, the journal will be shown to all players. Otherwise, only to the triggering player or token owner.
+
+The region will automatically open the specified journal when triggered. You can use either the Journal ID (for precision) or Journal Name (for convenience).
 
 ### Region Clicked Event
 

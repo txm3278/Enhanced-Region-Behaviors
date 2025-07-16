@@ -1,8 +1,12 @@
 import { TrapRegionBehaviorType } from './regionBehaviors/trapRegionBehaviorType.ts';
-import { MusicRegionBehaviorType } from './regionBehaviors/musicRegionBehaviorType.ts';
+import {
+  MusicRegionBehaviorType,
+  handleMusicRegion,
+} from './regionBehaviors/musicRegionBehaviorType.ts';
 import { SoundEffectRegionBehaviorType } from './regionBehaviors/soundEffectRegionBehaviorType.ts';
 import { VisualEffectRegionBehaviorType } from './regionBehaviors/visualEffectRegionBehaviorType.ts';
 import { ElevationRegionBehaviorType } from './regionBehaviors/elevationRegionBehaviorType.ts';
+import { JournalRegionBehaviorType } from './regionBehaviors/journalRegionBehaviorType.ts';
 import { registerClickEvent } from './events.ts';
 import { registerSettings } from './settings.ts';
 
@@ -11,6 +15,12 @@ const MUSIC_TYPE = 'enhanced-region-behavior.Music';
 const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.SoundEffect';
 const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.VisualEffect';
 const ELEVATION_TYPE = 'enhanced-region-behavior.Elevation';
+const JOURNAL_TYPE = 'enhanced-region-behavior.Journal';
+
+const registerQueries = () => {
+  CONFIG.queries['enhanced-region-behavior.handleMusicRegion'] =
+    handleMusicRegion;
+};
 
 Hooks.once('init', () => {
   registerSettings();
@@ -18,6 +28,8 @@ Hooks.once('init', () => {
     'enhanced-region-behavior | Initializing Enhanced Region Behaviors'
   );
   registerClickEvent();
+  registerQueries();
+
   if (game.system?.id === 'dnd5e') {
     CONFIG.RegionBehavior.dataModels[TRAP_TYPE] = TrapRegionBehaviorType;
     CONFIG.RegionBehavior.typeIcons[TRAP_TYPE] =
@@ -44,6 +56,8 @@ Hooks.once('init', () => {
     ElevationRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons[ELEVATION_TYPE] =
     'fa-solid fa-arrow-up-from-ground-water';
+  CONFIG.RegionBehavior.dataModels[JOURNAL_TYPE] = JournalRegionBehaviorType;
+  CONFIG.RegionBehavior.typeIcons[JOURNAL_TYPE] = 'fa-solid fa-book-open';
 });
 
 Hooks.once('i18nInit', () => {
@@ -54,4 +68,5 @@ Hooks.once('i18nInit', () => {
     VisualEffectRegionBehaviorType
   );
   foundry.helpers.Localization.localizeDataModel(ElevationRegionBehaviorType);
+  foundry.helpers.Localization.localizeDataModel(JournalRegionBehaviorType);
 });

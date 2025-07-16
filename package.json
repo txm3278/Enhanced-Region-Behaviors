@@ -22,14 +22,13 @@
     "@foundryvtt/foundryvtt-cli": "^1.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.30.1",
+    "@eslint/js": "^9.31.0",
     "dnd5e-types": "github:adriangaro/dnd5e-types#5.0.x",
-    "eslint": "^9.30.1",
+    "eslint": "^9.31.0",
     "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
-    "midi-qol": "gitlab:tposney/midi-qol#v13",
     "sequencer": "github:fantasycalendar/FoundryVTT-Sequencer#pull/414",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.36.0",
-    "vite": "^7.0.2"
+    "typescript-eslint": "^8.37.0",
+    "vite": "^7.0.4"
   }
 }
