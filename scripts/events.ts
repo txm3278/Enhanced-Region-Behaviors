@@ -50,7 +50,8 @@ export const registerClickEvent = () => {
       const field = wrapped(
         ...args
       ) as foundry.data.regionBehaviors.RegionBehaviorType.EventsField;
-      const events = args[0] as string[] | undefined;
+      const eventArgs = args as [{ events: string[] | undefined }] | undefined;
+      const events = eventArgs?.[0]?.events;
       if (
         game.settings?.get('enhanced-region-behavior', 'globalOnClick') ||
         events?.includes('regionClicked')
