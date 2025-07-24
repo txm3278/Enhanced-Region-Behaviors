@@ -5,8 +5,8 @@ export const registerClickEvent = () => {
   typedLibWrapper.register(
     'enhanced-region-behavior',
     'foundry.canvas.layers.TokenLayer.prototype._onClickLeft',
-    function (wrapped, ...args) {
-      const event = args[0] as foundry.canvas.Canvas.Event.Pointer;
+    function (wrapped, ...args: Parameters<typeof foundry.canvas.layers.TokenLayer.prototype['_onClickLeft']>) {
+      const event = args[0];
       const clickCoords = event.interactionData.origin;
       if (!clickCoords) {
         console.warn('No click coordinates found in event:', event);
@@ -38,6 +38,7 @@ export const registerClickEvent = () => {
               })(),
           })
       );
+      //@ts-expect-error libWrapper typings aren't accurate
       return wrapped(...args);
     },
     'WRAPPER'
@@ -46,12 +47,12 @@ export const registerClickEvent = () => {
   typedLibWrapper.register(
     'enhanced-region-behavior',
     'foundry.data.regionBehaviors.RegionBehaviorType._createEventsField',
-    function (wrapped, ...args) {
+    function (wrapped, ...args: Parameters<typeof foundry.data.regionBehaviors.RegionBehaviorType['_createEventsField']>) {
       const field = wrapped(
+        //@ts-expect-error libWrapper typings aren't accurate
         ...args
       ) as foundry.data.regionBehaviors.RegionBehaviorType.EventsField;
-      const eventArgs = args as [{ events: string[] | undefined }] | undefined;
-      const events = eventArgs?.[0]?.events;
+      const events = args[0]?.events;
       if (
         game.settings?.get('enhanced-region-behavior', 'globalOnClick') ||
         events?.includes('regionClicked')

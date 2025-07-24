@@ -108,7 +108,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     // Check if MidiQOL is active
-    const midiQOLActive = !!game.modules.get('midi-qol').active;
+    const midiQOLActive = game.modules.get('midi-qol')?.active;
 
     // Roll saving throw
     let saveTotal = 0;

@@ -44,7 +44,7 @@ Hooks.once('init', () => {
     SoundEffectRegionBehaviorType;
   CONFIG.RegionBehavior.typeIcons[SOUND_EFFECT_TYPE] =
     'fa-solid fa-volume-high';
-  if (game.modules?.get('sequencer').active) {
+  if (game.modules?.get('sequencer')?.active) {
     CONFIG.RegionBehavior.dataModels[VISUAL_EFFECT_TYPE] =
       VisualEffectRegionBehaviorType;
     CONFIG.RegionBehavior.typeIcons[VISUAL_EFFECT_TYPE] =

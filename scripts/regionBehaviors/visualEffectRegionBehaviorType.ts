@@ -62,7 +62,7 @@ export class VisualEffectRegionBehaviorType extends foundry.data.regionBehaviors
 
     const regionDoc = event.region;
     const behaviorId = this.parent.id ?? '0';
-    const sequencerActive = game.modules?.get('sequencer').active;
+    const sequencerActive = game.modules?.get('sequencer')?.active;
     if (!sequencerActive) {
       ui.notifications?.warn(
         'The Sequencer module is required for visual effects.'

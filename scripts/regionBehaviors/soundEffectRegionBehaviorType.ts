@@ -51,7 +51,7 @@ export class SoundEffectRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     // Use Sequencer if the module is active
-    const sequencerActive = game.modules?.get('sequencer').active;
+    const sequencerActive = game.modules?.get('sequencer')?.active;
     if (sequencerActive && typeof Sequence !== 'undefined') {
       try {
         await new Sequence().sound().file(soundPath).volume(volume).play();
