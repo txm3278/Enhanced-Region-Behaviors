@@ -4,7 +4,6 @@
   "description": "Adds new region options to scene regions",
   "version": "#{VERSION}#",
   "library": "false",
-  "manifestPlusVersion": "1.2.0",
   "compatibility": {
     "minimum": 13,
     "verified": 13,
@@ -33,6 +32,11 @@
       "lang": "en",
       "name": "English",
       "path": "languages/en.json"
+    },
+    {
+      "lang": "cs",
+      "name": "Čeština",
+      "path": "languages/cs.json"
     }
   ],
   "url": "https://github.com/txm3278/Enhanced-Region-Behaviors",
