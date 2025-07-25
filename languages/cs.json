@@ -1,0 +1,159 @@
+{
+  "enhanced-region-behavior": {
+    "TrapDamageMessage": "{name} spustil/a past a utrpěl/a {damage} zranění typu {type}!",
+    "TrapAvoidedMessage": "{name} se vyhnul/a pasti a utrpěl/a snížené zranění {damage} typu {type}!",
+    "TrapSavingThrowMessage": "Záchrana",
+    "TrapDamageRollMessage": "Hod na zásah pasti",
+    "regionClickedLabel": "Kliknuto na oblast",
+    "Settings": {
+      "globalOnClickName": "Povolit ´nakliknutí´ u všech chování?",
+      "globalOnClickHint": "Zašktnutím umožníš výběr události ´na kliknutí´ u všech chování oblastí. Některá chování mohou při aktivaci této události přestat fungovat, používej to proto opatrně."
+    },
+    "Regions": {
+      "Trap": {
+        "FIELDS": {
+          "saveDC": {
+            "label": "SO záchrany",
+            "hint": "Obtížnost záchranného hodu proti zranění pasti."
+          },
+          "saveAbility": {
+            "label": "Vlastnost záchrany",
+            "hint": "Vlastnost použitá pro záchranný hod proti zranění pasti."
+          },
+          "damage": {
+            "label": "Zranění",
+            "hint": "Množství zranění, které past způsobí po spuštění."
+          },
+          "savedDamage": {
+            "label": "Zranění při úspěchu",
+            "hint": "Množství zranění, které past způsobí po úspěšném záchranném hodu."
+          },
+          "damageType": {
+            "label": "Typ zranění",
+            "hint": "Typ zranění způsobený pastí (např. chladné, kyselinové, ohnivé)."
+          },
+          "saveFailedMessage": {
+            "label": "Zpráva při selhání",
+            "hint": "Zpráva zobrazená po neúspěšném záchranném hodu."
+          },
+          "saveSucceededMessage": {
+            "label": "Zpráva při úspěchu",
+            "hint": "Zpráva zobrazená po úspěšném záchranném hodu."
+          },
+          "disableAfterTrigger": {
+            "label": "Deaktivovat po spuštění?",
+            "hint": "Po zaškrtnutí bude past po prvním spuštění deaktivována."
+          },
+          "automateDamage": {
+            "label": "Aplikovat zranění automaticky?",
+            "hint": "Po zaškrtnutí bude past po spuštění automaticky aplikovat zranění."
+          }
+        }
+      },
+      "Music": {
+        "FIELDS": {
+          "playlistName": {
+            "label": "Název seznamu skladeb",
+            "hint": "Název seznamu skladeb, ve kterém hledat skladby."
+          },
+          "songNames": {
+            "label": "Názvy skladeb",
+            "hint": "Čárkami oddělený seznam názvů skladeb, které se mají přehrát."
+          },
+          "playAll": {
+            "label": "Přehrát všechny skladby?",
+            "hint": "Po zaškrtnutí budou přehrány všechny skladby současně."
+          },
+          "stop": {
+            "label": "Zastavit aktuální hudbu?",
+            "hint": "Po zaškrtnutí bude veškerá aktuálně přehrávaná hudba před spuštěním nové skladby zastavena."
+          },
+          "playPlaylist": {
+            "label": "Přehrát celý seznam skladeb?",
+            "hint": "Po zaškrtnutí se přehraje celý seznam skladeb namísto jednotlivých skladeb."
+          }
+        }
+      },
+      "SoundEffect": {
+        "FIELDS": {
+          "volume": {
+            "label": "Hlasitost",
+            "hint": "Úroveň hlasitosti zvukového efektu (0 až 1)."
+          },
+          "soundPath": {
+            "label": "Cesta ke zvukovému souboru",
+            "hint": "Cesta ke zvukovému souboru nebo efektu sekvenceru, který se má přehrát."
+          }
+        }
+      },
+      "VisualEffect": {
+        "FIELDS": {
+          "imagePath": {
+            "label": "Název efektu",
+            "hint": "Název vizuálního efektu, který se má přehrát, nebo cesta k souboru ilustrace."
+          },
+          "duration": {
+            "label": "Délka trvání",
+            "hint": "Délka trvání vizuálního efektu v sekundách (pro přehrání celé délky nastav na 0)."
+          },
+          "scale": {
+            "label": "Měřítko",
+            "hint": "Měřítko vizuálního efektu (1.0 je normální velikost)."
+          },
+          "infinite": {
+            "label": "Nekonečné trvání?",
+            "hint": "Po zaškrtnutí bude vizuální efekt přehráván nekonečně dlouho (zastaví se při deaktivaci chování)."
+          },
+          "belowTokens": {
+            "label": "Zobrazovat pod tokeny?",
+            "hint": "Po zaškrtnutí bude vizuální efekt zobrazen pod tokeny."
+          },
+          "playAtTokenLocation": {
+            "label": "Přehrát na pozici tokenu?",
+            "hint": "Po zaškrtnutí bude vizuální efekt přehrán na pozici tokenu, který jej spustil."
+          }
+        }
+      },
+      "Elevation": {
+        "FIELDS": {
+          "elevation": {
+            "label": "Nadmořská výška",
+            "hint": "Nadmořská výška, která se nastaví pro tokeny vstupující do této oblasti."
+          }
+        }
+      },
+      "Journal": {
+        "FIELDS": {
+          "journalId": {
+            "label": "ID záznamu",
+            "hint": "Jedinečné ID záznamu, který se má otevřít. Má přednost před názvem záznamu, pokud je zadáno obojí."
+          },
+          "journalName": {
+            "label": "Název zázmamu",
+            "hint": "Název záznamu, který se má otevřít. Použije se, pokud není zadáno ID záznamu."
+          },
+          "journalPageId": {
+            "label": "ID stránky záznamu",
+            "hint": "Konkrétní ID stránky záznamů, která se má zobrazit (volitelné)."
+          },
+          "showToAll": {
+            "label": "Zobrazit všem hráčům?",
+            "hint": "Je-li zaškrtnuto, záznam se zobrazí všem hráčům. Jinak pouze spouštějícímu hráči, nebo vlastníkovi tokenu."
+          }
+        }
+      }
+    }
+  },
+  "TYPES": {
+    "RegionBehavior": {
+      "enhanced-region-behavior": {
+        "Trap": "Past",
+        "Music": "Hudba",
+        "SoundEffect": "Zvukový efekt",
+        "VisualEffect": "Vizuální efekt",
+        "Elevation": "Nadmořská výška",
+        "Journal": "Otevření záznamu"
+      }
+    }
+  }
+}
