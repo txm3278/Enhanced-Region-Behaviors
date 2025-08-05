@@ -83,7 +83,7 @@ export class JournalRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     if (!document && !this.journalPageId) {
-      const identifier = (this.journalId ?? this.journalName) || 'unknown';
+      const identifier = (this.journalId ?? this.journalName) ?? 'unknown';
       ui.notifications?.warn(`Document not found: "${identifier}"`);
       return;
     }

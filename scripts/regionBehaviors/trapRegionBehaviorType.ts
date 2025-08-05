@@ -38,7 +38,7 @@ const trapSchema = {
   }),
   damageType: new foundry.data.fields.StringField({
     required: true,
-    initial: 'Piercing',
+    initial: 'piercing',
     choices: () =>
       Object.keys(CONFIG.DND5E.damageTypes).reduce((acc, key) => {
         acc[key] = CONFIG.DND5E.damageTypes[key].label;
