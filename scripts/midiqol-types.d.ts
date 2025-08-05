@@ -1,7 +1,4 @@
 declare global {
-  interface Actor {
-    rollSavingThrow(options: { ability: string }): Promise<Roll[]>;
-  }
 
   // Add MidiQOL to the global scope
   const MidiQOL: {
@@ -21,6 +18,18 @@ declare global {
         noConcentrationCheck?: boolean;
       }
     ): Promise<void>;
+    completeItemUse(
+      item: Item,
+      config?: Record<string, unknown>,
+      options?: {
+        targetUuids?: string[];
+        workflowOptions?: {
+          autoConsumeResource?: string;
+          autoRollDamage?: string;
+          autoFastDamage?: boolean;
+        };
+      }
+    ): Promise<MidiQOL.Workflow | undefined>;
   };
 }
 

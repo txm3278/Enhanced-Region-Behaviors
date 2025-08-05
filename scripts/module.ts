@@ -7,8 +7,10 @@ import { SoundEffectRegionBehaviorType } from './regionBehaviors/soundEffectRegi
 import { VisualEffectRegionBehaviorType } from './regionBehaviors/visualEffectRegionBehaviorType.ts';
 import { ElevationRegionBehaviorType } from './regionBehaviors/elevationRegionBehaviorType.ts';
 import { JournalRegionBehaviorType } from './regionBehaviors/journalRegionBehaviorType.ts';
+import { TriggerActionRegionBehaviorType } from './regionBehaviors/triggerActionRegionBehaviorType.ts';
 import { registerClickEvent } from './events.ts';
 import { registerSettings } from './settings.ts';
+import { updateTargets, itemUse } from './utils.ts';
 
 const TRAP_TYPE = 'enhanced-region-behavior.Trap';
 const MUSIC_TYPE = 'enhanced-region-behavior.Music';
@@ -16,10 +18,13 @@ const SOUND_EFFECT_TYPE = 'enhanced-region-behavior.SoundEffect';
 const VISUAL_EFFECT_TYPE = 'enhanced-region-behavior.VisualEffect';
 const ELEVATION_TYPE = 'enhanced-region-behavior.Elevation';
 const JOURNAL_TYPE = 'enhanced-region-behavior.Journal';
+const TRIGGER_ACTION_TYPE = 'enhanced-region-behavior.TriggerAction';
 
 const registerQueries = () => {
   CONFIG.queries['enhanced-region-behavior.handleMusicRegion'] =
     handleMusicRegion;
+  CONFIG.queries['enhanced-region-behavior.updateTargets'] = updateTargets;
+  CONFIG.queries['enhanced-region-behavior.itemUse'] = itemUse;
 };
 
 Hooks.once('init', () => {
@@ -34,8 +39,13 @@ Hooks.once('init', () => {
     CONFIG.RegionBehavior.dataModels[TRAP_TYPE] = TrapRegionBehaviorType;
     CONFIG.RegionBehavior.typeIcons[TRAP_TYPE] =
       'fa-solid fa-triangle-exclamation';
+    CONFIG.RegionBehavior.dataModels[TRIGGER_ACTION_TYPE] =
+      TriggerActionRegionBehaviorType;
+    CONFIG.RegionBehavior.typeIcons[TRIGGER_ACTION_TYPE] =
+      'fa-solid fa-hand-sparkles';
   } else {
     delete game.model?.RegionBehavior[TRAP_TYPE];
+    delete game.model?.RegionBehavior[TRIGGER_ACTION_TYPE];
   }
 
   CONFIG.RegionBehavior.dataModels[MUSIC_TYPE] = MusicRegionBehaviorType;
@@ -69,4 +79,7 @@ Hooks.once('i18nInit', () => {
   );
   foundry.helpers.Localization.localizeDataModel(ElevationRegionBehaviorType);
   foundry.helpers.Localization.localizeDataModel(JournalRegionBehaviorType);
+  foundry.helpers.Localization.localizeDataModel(
+    TriggerActionRegionBehaviorType
+  );
 });

@@ -23,7 +23,8 @@
       "SoundEffect": {},
       "VisualEffect": {},
       "Elevation": {},
-      "Journal": {}
+      "Journal": {},
+      "TriggerAction": {}
     }
   },
   "esmodules": ["dist/enhanced-region-behavior.mjs"],

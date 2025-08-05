@@ -1,9 +1,5 @@
 {
   "enhanced-region-behavior": {
-    "TrapDamageMessage": "{name} spustil/a past a utrpěl/a {damage} zranění typu {type}!",
-    "TrapAvoidedMessage": "{name} se vyhnul/a pasti a utrpěl/a snížené zranění {damage} typu {type}!",
-    "TrapSavingThrowMessage": "Záchrana",
-    "TrapDamageRollMessage": "Hod na zásah pasti",
     "regionClickedLabel": "Kliknuto na oblast",
     "Settings": {
       "globalOnClickName": "Povolit ´nakliknutí´ u všech chování?",
@@ -48,7 +44,11 @@
             "label": "Aplikovat zranění automaticky?",
             "hint": "Po zaškrtnutí bude past po spuštění automaticky aplikovat zranění."
           }
-        }
+        },
+        "TrapDamageMessage": "{name} spustil/a past a utrpěl/a {damage} zranění typu {type}!",
+        "TrapAvoidedMessage": "{name} se vyhnul/a pasti a utrpěl/a snížené zranění {damage} typu {type}!",
+        "TrapSavingThrowMessage": "Záchrana",
+        "TrapDamageRollMessage": "Hod na zásah pasti"
       },
       "Music": {
         "FIELDS": {

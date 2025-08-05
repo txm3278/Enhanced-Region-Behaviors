@@ -1,9 +1,5 @@
 {
   "enhanced-region-behavior": {
-    "TrapDamageMessage": "{name} triggered a trap and took {damage} {type} damage!",
-    "TrapAvoidedMessage": "{name} dodged a trap and took a reduced {damage} {type} damage!",
-    "TrapSavingThrowMessage": "Saving Throw",
-    "TrapDamageRollMessage": "Trap Damage Roll",
     "regionClickedLabel": "Region Clicked",
     "Settings": {
       "globalOnClickName": "Enable onClick Event on all Region Behaviors",
@@ -13,12 +9,16 @@
       "Trap": {
         "FIELDS": {
           "saveDC": {
-            "label": "Save DC",
-            "hint": "The DC for the saving throw against the trap's damage."
+            "label": "DC",
+            "hint": "The DC for the saving throw/ability check"
           },
           "saveAbility": {
             "label": "Save Ability",
-            "hint": "The ability used for the saving throw against the trap's damage."
+            "hint": "The ability used for the saving throw against the trap's damage. Takes priority over skill checks."
+          },
+          "skillChecks": {
+            "label": "Skill Checks",
+            "hint": "Skill checks to perform when the trap is triggered. User will be able to choose which skill to use."
           },
           "damage": {
             "label": "Damage",
@@ -40,15 +40,26 @@
             "label": "Save Success Message",
             "hint": "Message displayed when the saving throw succeeds."
           },
-          "disableAfterTrigger": {
-            "label": "Disable After Trigger",
-            "hint": "If enabled, the trap will be disabled after it is triggered once."
-          },
           "automateDamage": {
             "label": "Automate Damage",
             "hint": "If enabled, the trap will automatically apply damage when triggered."
+          },
+          "triggerBehaviorOnSave": {
+            "label": "Trigger Behaviors on Save",
+            "hint": "If set, these behaviors will be triggered when the saving throw is successful."
+          },
+          "triggerBehaviorOnFail": {
+            "label": "Trigger Behaviors on Fail",
+            "hint": "If set, these behaviors will be triggered when the saving throw fails."
           }
-        }
+        },
+        "TrapDialogTitle": "Trap",
+        "TrapSaveAbilityContent": "Choose which Ability to make the save with",
+        "TrapSkillCheckContent": "Choose which Skill to make the check with",
+        "TrapDamageMessage": "{name} triggered a trap and took {damage} {type} damage!",
+        "TrapAvoidedMessage": "{name} dodged a trap and took a reduced {damage} {type} damage!",
+        "TrapSavingThrowMessage": "Saving Throw",
+        "TrapDamageRollMessage": "Trap Damage Roll"
       },
       "Music": {
         "FIELDS": {
@@ -134,11 +145,20 @@
           },
           "journalPageId": {
             "label": "Journal Page ID",
-            "hint": "For Journal Entries: The specific page ID to show (optional)."
+            "hint": "The specific page ID to show (optional). Takes priority over Journal Name and Journal ID."
           },
           "showToAll": {
             "label": "Show to All Players",
             "hint": "If enabled, the journal entry will be shown to all players. Otherwise, only to the triggering player or token owner."
+          }
+        },
+        "MigrationError": "Migration failed for journalPageId. Please reset the page ID in the Open Journal Behavior settings."
+      },
+      "TriggerAction": {
+        "FIELDS": {
+          "itemId": {
+            "label": "Item ID",
+            "hint": "The unique ID of the item to trigger. (Drag from token you want to use the item from)"
           }
         }
       }
@@ -152,7 +172,8 @@
         "SoundEffect": "Sound Effect",
         "VisualEffect": "Visual Effect",
         "Elevation": "Elevation",
-        "Journal": "Open Journal"
+        "Journal": "Open Journal",
+        "TriggerAction": "Trigger Action"
       }
     }
   }
