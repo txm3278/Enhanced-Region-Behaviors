@@ -9,14 +9,16 @@ const trapSchema = {
   }),
   saveAbility: new foundry.data.fields.SetField(
     new foundry.data.fields.StringField({
-      initial: 'dex',
       required: false,
       choices: () =>
         Object.keys(CONFIG.DND5E.abilities).reduce((acc, key) => {
           acc[key] = CONFIG.DND5E.abilities[key].abbreviation;
           return acc;
         }, {}),
-    })
+    }),
+    {
+      initial: ['dex'],
+    }
   ),
   skillChecks: new foundry.data.fields.SetField(
     new foundry.data.fields.StringField({
@@ -173,31 +175,37 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     }
 
     const saved = saveTotal > (this.saveDC ?? 0);
-    const damageRoll = await new Roll(
-      saved ? this.savedDamage : this.damage
-    ).roll();
-
-    await damageRoll.toMessage({
-      speaker: ChatMessage.getSpeaker({ token }),
+    const damageRoll = await new CONFIG.Dice.DamageRoll(
+      saved ? this.savedDamage : this.damage,
+      token.actor.getRollData(),
+      {
+        type: this.damageType,
+        appearance: { colorset: this.damageType },
+      }
+    ).toMessage({
       flavor: game.i18n?.localize(
         'enhanced-region-behavior.Regions.Trap.TrapDamageRollMessage'
       ),
     });
+    const damage = damageRoll?.rolls[0]?.total;
+    if (this.automateDamage && damage && damage > 0) {
+      if (midiQOLActive) {
+        const forceApply =
+          MidiQOL.configSettings()?.autoApplyDamage?.includes('yes') ?? false;
 
-    if (this.automateDamage && damageRoll.total > 0) {
-      if (midiQOLActive && typeof MidiQOL.applyTokenDamage === 'function') {
         await MidiQOL.applyTokenDamage(
-          [{ damage: damageRoll.total, type: this.damageType }],
-          damageRoll.total,
+          [{ type: this.damageType, damage }],
+          damage,
           new Set([token]),
           null,
-          null
+          null,
+          { forceApply }
         );
       } else {
         // Core Foundry/dnd5e damage application
         await actor.applyDamage([
           {
-            value: damageRoll.total,
+            value: damage,
             type: this.damageType,
             properties: new Set(),
           },
@@ -214,7 +222,7 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
           saved ? this.saveSucceededMessage : this.saveFailedMessage,
           {
             name: token.name,
-            damage: damageRoll.total.toString(),
+            damage: damage?.toString() ?? '0',
             type: this.damageType,
           }
         ),

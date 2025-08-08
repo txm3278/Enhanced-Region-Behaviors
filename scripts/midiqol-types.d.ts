@@ -30,10 +30,16 @@ declare global {
         };
       }
     ): Promise<MidiQOL.Workflow | undefined>;
+    configSettings(): MidiQOL.ConfigSettings;
   };
 }
 
 declare namespace MidiQOL {
+  interface ConfigSettings {
+    autoApplyDamage?: string[];
+    // Add more config settings as needed
+  }
+
   class Workflow {
     constructor(
       actor: Actor,

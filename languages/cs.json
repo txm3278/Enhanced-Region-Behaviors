@@ -14,15 +14,19 @@
           },
           "saveAbility": {
             "label": "Vlastnost záchrany",
-            "hint": "Vlastnost použitá pro záchranný hod proti zranění pasti."
+            "hint": "Vlastnost použitá pro záchranný hod proti zranění pasti. Má přednost před ověřeními dovedností."
+                      },
+          "skillChecks": {
+            "label": "Ověření dovednosti",
+            "hint": "Ověření dovednosti, která se provedou po spuštění pasti. Uživatel si bude moci zvolit, kterou dovednost použije."
           },
           "damage": {
-            "label": "Zranění",
-            "hint": "Množství zranění, které past způsobí po spuštění."
+            "label": "Zranění při selhání",
+            "hint": "Zranění po selhání v záchraně."
           },
           "savedDamage": {
             "label": "Zranění při úspěchu",
-            "hint": "Množství zranění, které past způsobí po úspěšném záchranném hodu."
+            "hint": "Zranění po úspěšné záchraně."
           },
           "damageType": {
             "label": "Typ zranění",
@@ -30,24 +34,31 @@
           },
           "saveFailedMessage": {
             "label": "Zpráva při selhání",
-            "hint": "Zpráva zobrazená po neúspěšném záchranném hodu."
+            "hint": "Zpráva zobrazená po selhání v záchraně."
           },
           "saveSucceededMessage": {
             "label": "Zpráva při úspěchu",
-            "hint": "Zpráva zobrazená po úspěšném záchranném hodu."
-          },
-          "disableAfterTrigger": {
-            "label": "Deaktivovat po spuštění?",
-            "hint": "Po zaškrtnutí bude past po prvním spuštění deaktivována."
+            "hint": "Zpráva zobrazená po úspěšné záchraně."
           },
           "automateDamage": {
-            "label": "Aplikovat zranění automaticky?",
+            "label": "Automaticky zranit?",
             "hint": "Po zaškrtnutí bude past po spuštění automaticky aplikovat zranění."
+          },
+          "triggerBehaviorOnSave": {
+            "label": "Spuštěné chování při úspěchu",
+            "hint": "Pokud je nastaveno, pak se toto chování spustí při úspěšné záchraně."
+          },
+          "triggerBehaviorOnFail": {
+            "label": "Spuštěné chování při selhání",
+            "hint": "Pokud je nastaveno, pak se toto chování spustí při neúspěšné záchraně."
           }
         },
+        "TrapDialogTitle": "Past",
+        "TrapSaveAbilityContent": "Vyber, kterou vlastnost použít pro záchranný hod",
+        "TrapSkillCheckContent": "Vyber, kterou dovednost použít pro ověření",
         "TrapDamageMessage": "{name} spustil/a past a utrpěl/a {damage} zranění typu {type}!",
         "TrapAvoidedMessage": "{name} se vyhnul/a pasti a utrpěl/a snížené zranění {damage} typu {type}!",
-        "TrapSavingThrowMessage": "Záchrana",
+        "TrapSavingThrowMessage": "Záchranný hod",
         "TrapDamageRollMessage": "Hod na zásah pasti"
       },
       "Music": {
@@ -105,11 +116,11 @@
             "hint": "Po zaškrtnutí bude vizuální efekt přehráván nekonečně dlouho (zastaví se při deaktivaci chování)."
           },
           "belowTokens": {
-            "label": "Zobrazovat pod tokeny?",
+            "label": "Pod tokeny?",
             "hint": "Po zaškrtnutí bude vizuální efekt zobrazen pod tokeny."
           },
           "playAtTokenLocation": {
-            "label": "Přehrát na pozici tokenu?",
+            "label": "Na pozici tokenu?",
             "hint": "Po zaškrtnutí bude vizuální efekt přehrán na pozici tokenu, který jej spustil."
           }
         }
@@ -138,7 +149,16 @@
           },
           "showToAll": {
             "label": "Zobrazit všem hráčům?",
-            "hint": "Je-li zaškrtnuto, záznam se zobrazí všem hráčům. Jinak pouze spouštějícímu hráči, nebo vlastníkovi tokenu."
+            "hint": "Po zaškrtnutí se bude záznam zobrazovat všem hráčům. Jinak pouze spouštějícímu hráči, nebo vlastníkovi tokenu."
+          }
+        },
+        "MigrationError": "Migrace journalPageId selhala. Resetuj, prosím, ID stránky v nastavení chování záznamu."
+      },
+      "TriggerAction": {
+        "FIELDS": {
+          "itemId": {
+            "label": "ID položky",
+            "hint": "Unikátní ID položky, která se má spustit (přetáhni z tokenu, ze kterého se má položka použít)."
           }
         }
       }
@@ -151,8 +171,9 @@
         "Music": "Hudba",
         "SoundEffect": "Zvukový efekt",
         "VisualEffect": "Vizuální efekt",
-        "Elevation": "Nadmořská výška",
-        "Journal": "Otevření záznamu"
+        "Elevation": "Nastavit výšku",
+        "Journal": "Otevřít záznam",
+        "TriggerAction": "Spustit akci tokenu"
       }
     }
   }
