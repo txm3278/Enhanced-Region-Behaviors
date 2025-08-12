@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - run: npm ci
       - name : Vite build
         run: npm run build
@@ -105,7 +105,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v4
+  #       uses: actions/checkout@v5
   #     - name: Github Releases To Discord
   #       uses: SethCohen/github-releases-to-discord@v1.16.2
   #       with:
