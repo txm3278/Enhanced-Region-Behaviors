@@ -5,7 +5,7 @@ declare global {
     applyTokenDamage(
       damageDetail: { damage: number; type: string }[],
       totalDamage: number,
-      theTargets: Set<TokenDocument> | TokenDocument[],
+      theTargets: Set<foundry.canvas.placeables.Token | null> | foundry.canvas.placeables.Token[],
       item: Item | string | null,
       saves: Set<Roll> | Roll[] | null,
       options?: {

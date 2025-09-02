@@ -191,12 +191,12 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
     if (this.automateDamage && damage && damage > 0) {
       if (midiQOLActive) {
         const forceApply =
-          MidiQOL.configSettings()?.autoApplyDamage?.includes('yes') ?? false;
+          MidiQOL.configSettings().autoApplyDamage?.includes('yes') ?? false;
 
         await MidiQOL.applyTokenDamage(
           [{ type: this.damageType, damage }],
           damage,
-          new Set([token]),
+          new Set([token.object]),
           null,
           null,
           { forceApply }
