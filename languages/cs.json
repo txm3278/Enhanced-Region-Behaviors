@@ -2,8 +2,8 @@
   "enhanced-region-behavior": {
     "regionClickedLabel": "Kliknuto na oblast",
     "Settings": {
-      "globalOnClickName": "Povolit ´nakliknutí´ u všech chování?",
-      "globalOnClickHint": "Zašktnutím umožníš výběr události ´na kliknutí´ u všech chování oblastí. Některá chování mohou při aktivaci této události přestat fungovat, používej to proto opatrně."
+      "globalOnClickName": "Povolit 'nakliknutí' u všech chování?",
+      "globalOnClickHint": "Zaškrtnutím umožníš výběr události 'na kliknutí' u všech chování oblastí. Některá chování mohou při aktivaci této události přestat fungovat, používej to proto opatrně."
     },
     "Regions": {
       "Trap": {
