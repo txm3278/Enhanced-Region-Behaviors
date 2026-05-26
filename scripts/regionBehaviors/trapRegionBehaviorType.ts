@@ -173,8 +173,8 @@ export class TrapRegionBehaviorType extends foundry.data.regionBehaviors
       });
       saveTotal = skillRoll?.[0]?.total ?? 0;
     }
-
-    const saved = saveTotal > (this.saveDC ?? 0);
+    const rolledSaveDC = (await new Roll(String(this.saveDC)).evaluate()).total;
+    const saved = saveTotal >= rolledSaveDC;
     const damageRoll = await new CONFIG.Dice.DamageRoll(
       saved ? this.savedDamage : this.damage,
       token.actor.getRollData(),
